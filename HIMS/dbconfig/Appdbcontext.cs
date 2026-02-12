@@ -1,4 +1,9 @@
-﻿using HIMS.Models;
+using HIMS.Models.Admission_patient;
+using HIMS.Models.Billing;
+using HIMS.Models.Departments;
+using HIMS.Models.DoctorModel;
+using HIMS.Models.Pharmacy;
+using HIMS.Models.RegistrationFrontDesk;
 using Microsoft.EntityFrameworkCore;
 
 namespace HIMS.dbconfig
@@ -8,8 +13,14 @@ namespace HIMS.dbconfig
         public Appdbcontext(DbContextOptions options) : base(options) { }
 
 
-        public DbSet<Patient> patients { get; set; }
+        public DbSet<Models.PatientModels.Patient> patients { get; set; }
         public DbSet<Doctor> doctors { get; set; }
+        public DbSet<Registration> Registration { get; set; }
+        public DbSet<Admission>  Admission { get; set; }
+        public DbSet<Billing> Billing { get; set; }
+        public DbSet<Department> Department { get; set; }
+        public DbSet<Medicines> Medicines { get; set; }
 
-    }
+
+    };
 }
