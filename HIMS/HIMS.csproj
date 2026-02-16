@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Frontened_angular\**" />
+    <Content Remove="Frontened_angular\**" />
+    <EmbeddedResource Remove="Frontened_angular\**" />
+    <None Remove="Frontened_angular\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.2">
       <PrivateAssets>all</PrivateAssets>
@@ -20,8 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\NewFolder\" />
-    <Folder Include="Frontened_angular\" />
+    <Folder Include="Services\Dtos\DoctorDtos\" />
   </ItemGroup>
 
 </Project>
