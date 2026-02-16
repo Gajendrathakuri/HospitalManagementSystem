@@ -1,9 +1,11 @@
 using HIMS.Models.Admission_patient;
+using HIMS.Models.Appointment;
 using HIMS.Models.Billing;
 using HIMS.Models.Departments;
 using HIMS.Models.DoctorModel;
 using HIMS.Models.Pharmacy;
 using HIMS.Models.RegistrationFrontDesk;
+using HIMS.Models.StaffModel;
 using Microsoft.EntityFrameworkCore;
 
 namespace HIMS.dbconfig
@@ -20,7 +22,8 @@ namespace HIMS.dbconfig
         public DbSet<Billing> Billing { get; set; }
         public DbSet<Department> Department { get; set; }
         public DbSet<Medicines> Medicines { get; set; }
-
+        public DbSet<Appointment> appointment { get; set; }
+        public DbSet<Staff> staff { get; set; }
 
     };
 }

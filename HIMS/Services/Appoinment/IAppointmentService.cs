@@ -1,4 +1,5 @@
 ﻿using HIMS.Models.Appointment;
+using HIMS.Services.Dtos.AppointmentDtos;
 using System.Collections.Generic;
 using System.Runtime.Intrinsics.X86;
 using System.Threading.Channels;
@@ -14,8 +15,8 @@ namespace HIMS.Services.Appoinment
         //* List appointments
         //  👉 Use* methods, loops, validations*
 
-        Task<IEnumerable<Appointment>> ListAllAppointment();
-        Task<Appointment> CancelAppointment();
-        Task<Appointment> BookAppointment();
+        Task<List<AppointResponseDtos>> ListAllAppointment();
+        Task<bool> CancelAppointment(Guid appointid);
+        Task<Appointment> BookAppointment(CreateAppointmentDtos createAppointmentDtos);
     }
 }

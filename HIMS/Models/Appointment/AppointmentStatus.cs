@@ -4,5 +4,6 @@
     {
         Completed,
         Pending, 
+        Canceled
     }
 }
