@@ -9,6 +9,8 @@ namespace HIMS.Services.PatientServices
         Task<Models.PatientModels.Patient> GetPatientById(Guid id);
         Task<Models.PatientModels.Patient> CreatePatient(PatientDto patients);
         Task<Models.PatientModels.Patient> DeletePatient(Guid id);
+        Task<Models.PatientModels.Patient> UpdatePatient(Guid id, PatientDto patient);
+
     }
 
 }

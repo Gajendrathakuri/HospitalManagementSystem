@@ -17,6 +17,6 @@ namespace HIMS.Services.Appoinment
 
         Task<List<AppointResponseDtos>> ListAllAppointment();
         Task<bool> CancelAppointment(Guid appointid);
-        Task<Appointment> BookAppointment(CreateAppointmentDtos createAppointmentDtos);
+        Task<Appointment>  BookAppointment(CreateAppointmentDtos createAppointmentDtos);
     }
 }

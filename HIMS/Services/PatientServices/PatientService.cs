@@ -26,9 +26,11 @@ namespace HIMS.Services.Patient
             var newpatient = new Models.PatientModels.Patient
             {
                 Id = Guid.NewGuid(),  
+                Email=patient.Email,
                 Name = patient.Name,
                 Address = patient.Address,
                 City = patient.City,
+                DateofBirth = patient.DateofBirth,
                 Disease = patient.Disease,
                  CitizenshipNo=patient.CitizenshipNo,
                  PhoneNo=patient.PhoneNo,
@@ -36,7 +38,7 @@ namespace HIMS.Services.Patient
                  Age=patient.Age
             };
             await _dbcontext.patients.AddAsync(newpatient);
-            await _dbcontext.SaveChangesAsync();
+           await _dbcontext.SaveChangesAsync(); 
             return newpatient;
         }
 
@@ -60,7 +62,30 @@ namespace HIMS.Services.Patient
             await _dbcontext.SaveChangesAsync();
             return patient;
 
-            
         }
+
+//update patients
+     public async Task<Models.PatientModels.Patient> UpdatePatient(Guid id,PatientDto patient)
+        {
+            var patientExist = await _dbcontext.patients.FindAsync(id);
+            if (patient==null)
+            {
+                return null;
+            }
+
+            patientExist.Name = patient.Name;
+            patientExist.Address = patient.Address;
+            patientExist.City = patient.City;
+            patientExist.DateofBirth = patient.DateofBirth;
+            patientExist.CitizenshipNo = patient.CitizenshipNo;
+            patientExist.Age = patient.Age;
+            patientExist.Email = patient.Email;
+            patientExist.Symptoms = patient.Symptoms.ToList();
+            patientExist.PhoneNo = patient.PhoneNo;
+            patientExist.Gender = patient.Gender;
+
+            await _dbcontext.SaveChangesAsync();
+            return patientExist;
+        } 
     }
 }

@@ -60,5 +60,6 @@ namespace HIMS.Services.Appoinment
             await  _appdbcontext.SaveChangesAsync();
             return newAppointment; 
         }
+
     }
 }
