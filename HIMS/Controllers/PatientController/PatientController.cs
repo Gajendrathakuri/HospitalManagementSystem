@@ -6,8 +6,6 @@ namespace HIMS.Controllers.PatientController
 {
     [ApiController]
     [Route("api/[Controller]")]
-
-    
     public class PatientController:ControllerBase
     {
         private readonly IPatientService _ipatientservice;
