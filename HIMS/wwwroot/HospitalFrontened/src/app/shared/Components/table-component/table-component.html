@@ -1,0 +1,14 @@
+<div class="my-4 mx-auto container-fluid">
+  <ag-grid-angular
+      style="height: 500px; ;"
+      class="ag-theme-balham"
+      [rowData]="data"
+      [columnDefs]="columns"
+      [defaultColDef]="defaultColDef"
+      [pagination]="true"
+      [paginationPageSize]="10"
+      [rowSelection]="'single'"
+      [animateRows]="true"
+      (rowClicked)="onRowClick($event)">
+  </ag-grid-angular>
+</div>

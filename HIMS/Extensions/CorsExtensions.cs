@@ -1,4 +1,4 @@
-﻿
+
 
 namespace HIMS.Extensions
 {
@@ -6,16 +6,20 @@ namespace HIMS.Extensions
     {
         public static IServiceCollection defaultcors(this IServiceCollection service)
         {
-            service.AddCors((option) =>
+           
+            services.AddCors(options =>
             {
-                option.AddPolicy("AllowAll", policy =>
+                options.AddPolicy("AllowAll", builder =>
                 {
-                    policy.AllowAnyHeader()
-                    .AllowAnyOrigin()
-                    .AllowAnyMethod();
+                    builder
+                        .AllowAnyOrigin()
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
                 });
             });
-            return service;
+
+            return services;
+
         }
     }
 }

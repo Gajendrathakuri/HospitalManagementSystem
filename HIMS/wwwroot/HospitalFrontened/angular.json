@@ -17,33 +17,37 @@
         "build": {
           "builder": "@angular/build:application",
           "options": {
-            "browser": "src/main.ts",
-            "tsConfig": "tsconfig.app.json",
-            "assets": [
-              {
-                "glob": "**/*",
-                "input": "public"
-              }
-            ],
-            "styles": [
-              "src/styles.css"
-            ]
-          },
+  "outputPath": "dist/HospitalFrontened",
+  "index": "src/index.html",
+  "tsConfig": "tsconfig.app.json",
+  "assets": [
+    "src/favicon.ico",
+    "src/assets",
+    { "glob": "**/*", "input": "public", "output": "/" }
+  ],
+  "styles": [
+    "src/material-theme.scss",
+    "node_modules/bootstrap/dist/css/bootstrap.min.css",
+    "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
+   /*   //   "node_modules/ag-grid-community/styles/ag-grid.css",
+    // "node_modules/ag-grid-community/styles/ag-theme-alpine.css",
+    // "src/styles.css",  */
+    "node_modules/bootstrap-icons/font/bootstrap-icons.css"
+  ],
+  "scripts": [
+    "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+  ]
+},
           "configurations": {
             "production": {
               "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "500kB",
-                  "maximumError": "1MB"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "4kB",
-                  "maximumError": "8kB"
-                }
+                { "type": "initial", "maximumWarning": "500kB", "maximumError": "1MB" },
+                { "type": "anyComponentStyle", "maximumWarning": "4kB", "maximumError": "8kB" }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "optimization": true,
+              "extractLicenses": true,
+              "sourceMap": false
             },
             "development": {
               "optimization": false,
@@ -56,18 +60,12 @@
         "serve": {
           "builder": "@angular/build:dev-server",
           "configurations": {
-            "production": {
-              "buildTarget": "HospitalFrontened:build:production"
-            },
-            "development": {
-              "buildTarget": "HospitalFrontened:build:development"
-            }
+            "production": { "buildTarget": "HospitalFrontened:build:production" },
+            "development": { "buildTarget": "HospitalFrontened:build:development" }
           },
           "defaultConfiguration": "development"
         },
-        "test": {
-          "builder": "@angular/build:unit-test"
-        }
+        "test": { "builder": "@angular/build:unit-test" }
       }
     }
   }

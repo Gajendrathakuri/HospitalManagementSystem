@@ -1,0 +1,93 @@
+.toolbar {
+  display: flex;
+  height: 60px;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+}
+
+.logo-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.app-title {
+  font-size: 18px;
+  font-weight: 300;
+  text-align: center;
+  color: #0378FD;
+}
+
+.subtitle {
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+.search{
+    align-items: center;
+    height: 40px;
+    border-radius: 15px;
+    width: 500px;
+    outline: none;
+    font-size: 14px;
+    border: none;
+    background-color: transparent;
+}
+
+.search-field{
+    display:  flex;
+    background-color: #F4F4F4;
+    border-radius: 15px;
+    padding-left: 30px;
+    align-items: center;
+    position: relative;
+}
+
+.bi-search{
+    position: absolute;
+    left: 0;
+    font-size: 18px;
+    padding-left: 10px;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+
+.profileimage{
+    height: 30%;
+    width: 30%;
+    border-radius: 50%;
+
+}
+
+
+.bi-bell{
+    color: #0378FD ;
+}
+
+.right-side {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Space between bell, image, role */
+}
+
+.profileimage {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+
+
+.wrapper{
+    display: flex;
+    max-width: 800px;
+    min-width: 800px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.bi-search{
+    color: #0378FD;
+}

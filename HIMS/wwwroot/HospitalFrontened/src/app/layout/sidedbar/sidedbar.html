@@ -1,0 +1,19 @@
+<div class="main-container">
+  <div class="row no-gutters">
+    <div class="col side-bar">
+      <a
+        *ngFor="let item of navdatas"
+        class="nav-items nav-item"
+        [routerLink]="item.path"
+        routerLinkActive="active"
+      >
+        <i class="bi" [ngClass]="'bi-' + item.icon"></i>
+        <span *ngIf="isSidebarOpen">{{ item.name }}</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="col content-area">
+    <router-outlet></router-outlet>
+  </div>
+</div>

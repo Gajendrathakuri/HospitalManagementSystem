@@ -1,0 +1,9 @@
+.grid-wrapper {
+  width: 100%;
+  height: 400px;   /* VERY IMPORTANT */
+}
+
+.ag-theme-quartz {
+  width: 100%;
+  height: 100%;
+}
