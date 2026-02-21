@@ -5,11 +5,7 @@ import { CardComponent } from "../shared/Components/card-component/card-componen
 
 @Component({
   selector: 'app-dashboard',
-<<<<<<< HEAD
-  imports: [RouterOutlet, TableComponent, CardComponent],
-=======
   imports: [RouterOutlet, CardComponent],
->>>>>>> feature-backend/controller
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
 })

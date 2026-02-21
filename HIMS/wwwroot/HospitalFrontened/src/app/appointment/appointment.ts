@@ -1,16 +1,10 @@
-<<<<<<< HEAD
-import { Component } from '@angular/core';
 
-@Component({
-  selector: 'app-appointment',
-  imports: [],
-=======
 import { Component, Query } from '@angular/core';
 import { ListAllpatient } from "../patient/list-allpatient/list-allpatient";
 import { TableComponent } from "../shared/Components/table-component/table-component";
 import { ColDef } from 'ag-grid-community';
 import { AgGridModule } from 'ag-grid-angular';
-import { concatAll, filter } from 'rxjs';
+
 import { Router, RouterOutlet } from '@angular/router';
 import { routes } from '../app.routes';
 
@@ -21,13 +15,13 @@ type tpat={
 @Component({
   selector: 'app-appointment',
   imports: [AgGridModule, TableComponent],
->>>>>>> feature-backend/controller
+
   templateUrl: './appointment.html',
   styleUrl: './appointment.css',
 })
 export class Appointment {
-<<<<<<< HEAD
-=======
+
+
   constructor(private router:Router){}
 
 Rowdata=[
@@ -66,6 +60,6 @@ Rowdata=[
 
     ]
 
->>>>>>> feature-backend/controller
+
 
 }

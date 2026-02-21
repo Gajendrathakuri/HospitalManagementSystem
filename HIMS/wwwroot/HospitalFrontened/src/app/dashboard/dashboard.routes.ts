@@ -6,13 +6,10 @@ export const DashboardRoutes: Routes = [
         {
             path:"dashboard",
             component:Dashboard,
-<<<<<<< HEAD
             children:[
                 {path:"",redirectTo:'home',pathMatch:"full"},
               
             ]
-=======
->>>>>>> feature-backend/controller
         }
 
 ];

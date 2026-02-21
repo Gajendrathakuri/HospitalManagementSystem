@@ -23,12 +23,9 @@ ngOnInit(): void {
 
 GetAllPatient():void{
   this.patientservice.ListAllPatients().subscribe((res:IpatientReponse[])=>{
-<<<<<<< HEAD
     this.AllPatient=[...res];
-=======
     this.AllPatient=res;
     console.log(res);
->>>>>>> feature-backend/controller
     
   })
 }
