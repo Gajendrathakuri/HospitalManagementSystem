@@ -1,0 +1,35 @@
+<div class="container-fluid mx-auto">
+  <app-tablecomponent
+    [data]="AllPatient"
+    [columns]="patientColumns"
+    (rowClicked)="onRowSelected($event)"
+  >
+  </app-tablecomponent>
+</div>
+
+<div class="modal" tabindex="-1" id="update">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <h4 class="text-center"> Patient Details </h4>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
+
+            </div>
+            <div class="modal-body">
+                 <app-patient-update
+                  [Patient]="selectedRow"
+                    (save)="UpdatePatient($event)"
+                  ></app-patient-update>
+
+            </div>
+            <div class="modal-footer">
+                 <button class="btn btn-danger" (click)="close()" data-bs-dismis="modal">
+                     Close
+                 </button>
+                
+            </div>
+        </div>
+    </div>
+</div>

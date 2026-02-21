@@ -36,7 +36,13 @@ namespace HIMS.Controllers.PatientController
         public async Task<IActionResult> Create([FromBody] PatientDto patient)
 
         {
-            return Ok(await _ipatientservice.CreatePatient(patient));
+            var patients =await _ipatientservice.CreatePatient(patient);
+            if(patients==null)
+            {
+                return null;
+            }
+
+            return Ok(patients);
         }
 
         // getbyid
