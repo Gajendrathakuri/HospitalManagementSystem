@@ -1,0 +1,48 @@
+
+<div class="container mt-4">
+  <h3 class="mb-3">Patient Details</h3>
+  <form>
+    <div class="row mb-3">
+      <label class="col-sm-3 col-form-label"><strong>Full Name</strong></label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control-plaintext" readonly [value]="Currentpatient.name">
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <label class="col-sm-3 col-form-label"><strong>Age</strong></label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control-plaintext" readonly [value]="Currentpatient.Age">
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <label class="col-sm-3 col-form-label"><strong>Gender</strong></label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control-plaintext" readonly [value]="Currentpatient.gender">
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <label class="col-sm-3 col-form-label"><strong>Email</strong></label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control-plaintext" readonly [value]="Currentpatient.email">
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <label class="col-sm-3 col-form-label"><strong>Phone</strong></label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control-plaintext" readonly [value]="Currentpatient.contactNo">
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <label class="col-sm-3 col-form-label"><strong>Address</strong></label>
+      <div class="col-sm-9">
+        <textarea class="form-control-plaintext" readonly rows="2">{{Currentpatient.address}}</textarea>
+      </div>
+    </div>
+  </form>
+</div>
+
