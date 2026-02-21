@@ -1,0 +1,23 @@
+<mat-toolbar color="primary" class="toolbar">
+  <div class="wrapper">
+    <div class="logo-section">
+      <span class="app-title">Hamro Care</span>
+      <span class="subtitle">Hospital Management System</span>
+    </div>
+
+     <div class="search-field">
+         <i class="bi bi-search"></i>
+        <input class=" search mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+     </div>
+  </div>
+
+  <span class="spacer"></span>
+
+  <div class="right-side">
+    <button mat-icon-button>
+      <i class="bi bi-bell"></i>
+    </button>
+    <img class="profileimage" [src]="profileIcon" alt="" />
+    <span>{{ loginUserRole }}</span>
+  </div>
+</mat-toolbar>
