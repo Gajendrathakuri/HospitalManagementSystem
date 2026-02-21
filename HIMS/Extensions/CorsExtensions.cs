@@ -1,11 +1,12 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+
 
 namespace HIMS.Extensions
 {
     public static class CorsExtensions
     {
-        public static IServiceCollection AddCorsPolicy(this IServiceCollection services)
+        public static IServiceCollection defaultcors(this IServiceCollection service)
         {
+           
             services.AddCors(options =>
             {
                 options.AddPolicy("AllowAll", builder =>
@@ -18,6 +19,7 @@ namespace HIMS.Extensions
             });
 
             return services;
+
         }
     }
 }

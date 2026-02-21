@@ -10,7 +10,7 @@ builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 builder.Services.AddHimsServices();
-
+builder.Services.defaultcors();
 
 var connectionString = builder.Configuration.GetConnectionString("dbconnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 
@@ -27,7 +27,7 @@ if (app.Environment.IsDevelopment())
 
 
 app.UseHttpsRedirection();
-
+app.UseCors("AllowAll");
 app.UseAuthorization();
 
 app.MapControllers();
