@@ -1,10 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, Query } from '@angular/core';
 import { IpatientReponse } from '../../core/types/patient';
 import { PatientService } from '../../core/services/PatientService';
 import { TableComponent } from "../../shared/Components/table-component/table-component";
 import { ValueFormatterParams } from 'ag-grid-community';
 import * as bootstrap from "bootstrap";
 import { PatientUpdate } from "../patient-update/patient-update";
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-list-allpatient',
   imports: [TableComponent, PatientUpdate],
@@ -13,7 +14,7 @@ import { PatientUpdate } from "../patient-update/patient-update";
 })
 export class ListAllpatient implements OnInit {
 AllPatient:IpatientReponse[]=[];
-constructor(private patientservice:PatientService){}
+constructor(private patientservice:PatientService,private router:Router){}
 
 ngOnInit(): void {
   this.GetAllPatient();
@@ -62,7 +63,9 @@ GetAllPatient():void{
       const viewbutton=document.createElement("span");
       viewbutton.className='btn btn-sm btn-primary me-2 ';
       viewbutton.textContent='View'
-      viewbutton.onclick=()=>this.viewPatient(params.data);
+      viewbutton.onclick=()=>{
+        this.router.navigate(['patient/detail/',params.data.id]);
+      }
       container.appendChild(updateBtn);
       container.appendChild(deleteBtn);
       container.appendChild(viewbutton);

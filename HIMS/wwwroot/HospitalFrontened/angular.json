@@ -17,27 +17,27 @@
         "build": {
           "builder": "@angular/build:application",
           "options": {
-  "outputPath": "dist/HospitalFrontened",
-  "index": "src/index.html",
-  "tsConfig": "tsconfig.app.json",
-  "assets": [
-    "src/favicon.ico",
-    "src/assets",
-    { "glob": "**/*", "input": "public", "output": "/" }
-  ],
-  "styles": [
-    "src/material-theme.scss",
-    "node_modules/bootstrap/dist/css/bootstrap.min.css",
-    "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
-   /*   //   "node_modules/ag-grid-community/styles/ag-grid.css",
-    // "node_modules/ag-grid-community/styles/ag-theme-alpine.css",
-    // "src/styles.css",  */
-    "node_modules/bootstrap-icons/font/bootstrap-icons.css"
-  ],
-  "scripts": [
-    "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
-  ]
-},
+            "outputPath": "dist/HospitalFrontened",
+            "index": "src/index.html",
+            "tsConfig": "tsconfig.app.json",
+            "assets": [
+               {
+        "input": "./node_modules/@rishovt/angular-nepali-datepicker/assets",
+        "glob": "**/*",
+        "output": "/assets"
+    },
+              "src/favicon.ico",
+              "src/assets",
+              { "glob": "**/*", "input": "public", "output": "/" }
+            ],
+            "styles": [
+              "src/material-theme.scss",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
+              "node_modules/bootstrap-icons/font/bootstrap-icons.css"
+            ],
+            "scripts": ["node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"]
+          },
           "configurations": {
             "production": {
               "budgets": [

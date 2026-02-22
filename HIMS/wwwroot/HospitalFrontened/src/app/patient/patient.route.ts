@@ -2,6 +2,7 @@ import { Routes } from "@angular/router";
 import { Patientlayout } from "./patientlayout/patientlayout";
 import { ListAllpatient } from "./list-allpatient/list-allpatient";
 import { Header } from "../layout/header/header";
+import { PatientDetail } from "./patient-detail/patient-detail";
 
 export const PatientRoute:Routes=[
     {
@@ -9,7 +10,8 @@ export const PatientRoute:Routes=[
         component:Patientlayout, 
     },
     {
-        path:"about",
-        component:Header
+        path:"detail/:id",
+        component:PatientDetail,
+        
     }
 ]

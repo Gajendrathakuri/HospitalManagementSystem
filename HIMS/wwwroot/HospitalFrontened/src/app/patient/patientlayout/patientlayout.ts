@@ -4,7 +4,7 @@ import { PatientRegister } from '../Register/patient-register';
 import { RouterOutlet } from '@angular/router';
 @Component({
   selector: 'app-patientlayout',
-  imports: [PatientRegister, RouterOutlet],
+  imports: [PatientRegister, RouterOutlet, ListAllpatient],
 
   templateUrl: './patientlayout.html',
   styleUrl: './patientlayout.css',

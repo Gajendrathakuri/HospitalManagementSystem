@@ -3,29 +3,27 @@ import { TableComponent } from "../../shared/Components/table-component/table-co
 import { PatientDetail } from "../../patient/patient-detail/patient-detail";
 import { ActivatedRoute, Route } from '@angular/router';
 import { PatientService } from '../../core/services/PatientService';
+import { IpatientReponse } from '../../core/types/patient';
+import { NgForOf } from '@angular/common';
 
 @Component({
   selector: 'app-new-appointment',
-  imports: [ PatientDetail],
+  imports: [PatientDetail, NgForOf],
   templateUrl: './new-appointment.html',
   styleUrl: './new-appointment.css',
 })
 export class NewAppointment implements OnInit {
   constructor(private route:ActivatedRoute,private patientser:PatientService){
   }
-  CurrentPatient:any;
+  CurrentPatient:IpatientReponse | undefined ;
   patientid:any;
-
+ Doctors=["Ram","Shyam","Hari","Gopal"];
   ngOnInit(): void {
    this.patientid=this.route.snapshot.paramMap.get('patientId');
-   this.CurrentPatient=this.getSelectedPatient();
-   console.log(this.CurrentPatient);
-   console.log(this.getSelectedPatient());
-  }
-
-  getSelectedPatient():any{
-   return this.patientser.ListAllPatients().subscribe((res)=>{
-      res.filter((pat)=>pat.id==this.patientid);
+   this.patientser.ListAllPatients().subscribe((res)=>{
+     this.CurrentPatient= res.find((pat)=>pat.id==this.patientid);
+     console.log(this.CurrentPatient,"selected patient");
     })
   }
+
 }

@@ -3,120 +3,132 @@
     <div class="col-12 mx-auto">
       <h4 class="text-center">Register New Patient</h4>
 
-      <form [formGroup]="form" (click)="submit()">
+      <form *ngIf="form" [formGroup]="form" (submit)="submit()">
         <div class="row">
           <div class="col-4">
             <!-- fullname -->
             <div class="mt-3">
-              <input type="text" placeholder="Fullname" formControlName="name" class="form-control text-decoration-none" />
-              <div *ngIf="form.get('name')?.invalid && form.get('name')?.touched" class="text-danger">
-                  Name is required
-              </div>
+              <label for="name" class="form-label"
+                >FullName <span class="text-danger">*</span></label
+              >
+              <input
+                type="text"
+                placeholder="Fullname"
+                formControlName="name"
+                class="form-control text-decoration-none"
+              />
+              @if (f['name'].invalid && (f['name'].touched || f['name'].dirty)) {
+                <div class="text-danger">
+                  @if (f['name'].errors?.['required']) {
+                    <div>Name Field Is Required</div>
+                  }
+                </div>
+              }
             </div>
+
             <!-- age -->
             <div class="mt-3">
-              <input type="number" placeholder="Age" class="form-control" formControlName="age" />
-              <div *ngIf="form.get('age')?.invalid && form.get('age')?.touched" class="text-danger">Age is Required </div>
+              <label for="age" class="form-label">Age <span class="text-danger"> *</span></label>
+              <input
+                type="text"
+                id="age"
+                placeholder="Age"
+                class="form-control"
+                formControlName="age"
+                readonly
+                [value]="currentAge"
+              />
+              <!-- <div *ngIf="form.get('age')?.invalid && form.get('age')?.touched" class="text-danger">Age is Required </div> -->
             </div>
 
             <!-- phone -->
-               <div class="mt-3">
-              <input type="text" placeholder="Phone No" class="form-control"  formControlName="phoneNo"/>
+            <div class="mt-3">
+              <label for="contact" class="form-label">Contact No</label>
+              <input
+                type="text"
+                id="contact"
+                placeholder="Phone No"
+                class="form-control"
+                formControlName="phoneNo"
+              />
             </div>
           </div>
-          <div class="col-4">
+          <div class="col-3">
             <!-- address -->
             <div class="mt-3">
-              <input type="Address" placeholder="Address" formControlName="address" class="form-control" />
+              <label for="add" class="form-label">Address <span class="text-danger">*</span></label>
+              <input
+                id="add"
+                type="Address"
+                placeholder="Address"
+                formControlName="address"
+                class="form-control"
+              />
             </div>
             <!-- Gender -->
             <div class="mt-3">
-            
-              <select class="form-select" formControlName="gender">
+              <label for="gender" class="form-label">Gender </label>
+              <select class="form-select" id="gender" formControlName="gender">
                 <option value="">Select Gender</option>
-
-                <option *ngFor="let gender of GenderTypes" [value]="gender">
-                  {{ gender }}
-                </option>
+                <option [value]="0">Male</option>
+                <option [value]="1">Female</option>
+                <option [value]="2">Others</option>
               </select>
             </div>
             <!-- Citizenship No -->
-               <div class="mt-3">
-              <input type="text" placeholder="CitizenShip No" formControlName="citizenshipNo" class="form-control" />
+            <div class="mt-3">
+              <label for="ctno" class="form-label">CitizenShip No: </label>
+              <input
+                type="text"
+                placeholder="CitizenShip No"
+                id="ctno"
+                formControlName="citizenshipNo"
+                class="form-control"
+              />
             </div>
           </div>
           <!-- dob -->
+
           <div class="col-4">
             <div class="mt-3">
-              <input type="date" placeholder="Date-of-birth" formControlName="dateOfBirth" class="form-control" />
+              <label for="dob" class="form-label">Date of Birth</label>
+              <input
+                type="date"
+                id="dob"
+                placeholder="Date-of-birth"
+                (change)="getAge(form.get('dateOfBirth')?.value)"
+                class="form-control"
+                formControlName="dateOfBirth"
+              />
             </div>
             <!-- Regligion -->
-             <div class="mt-3">
-            
-              <select class="form-select" formControlName="religion">
+            <div class="mt-3">
+              <label for="religon" class="form-label">Religion</label>
+              <select class="form-select" id="religion" formControlName="religion">
                 <option value="">Religion</option>
-
                 <option *ngFor="let religon of Religons" [value]="religon">
                   {{ religon }}
                 </option>
               </select>
             </div>
-        
-               <div class="mt-3">
-              <input type="email" placeholder="Email" formControlName="email" [required]="false" class="form-control" />
+
+            <div class="mt-3">
+              <label for="email" class="form-label">Email</label>
+              <input
+                type="email"
+                id="email"
+                placeholder="Email"
+                formControlName="email"
+                [required]="false"
+                class="form-control"
+              />
             </div>
           </div>
-         
         </div>
-        <div class="row d-flex align-items-center justify-content-center ">
-             <button class="btn mt-3 btn-primary " style="width: 200px;">
-                Register
-             </button>
+        <div class="row d-flex align-items-center justify-content-center">
+          <button type="submit" class="btn mt-3 btn-primary" style="width: 200px">Register</button>
         </div>
       </form>
-    </div>
-  </div>
-</div>
-<app-list-allpatient/>
-
-<div class="modal fade" id="patientModal" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">{{ PatientData ? 'Update Patient' : 'Register Patient' }}</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-      </div>
-      <div class="modal-body">
-        <form [formGroup]="form">
-          <div class="row">
-            <div class="col-md-6">
-              <input type="text" class="form-control mb-2" formControlName="name" placeholder="Full Name" />
-              <input type="number" class="form-control mb-2" formControlName="age" placeholder="Age" />
-              <input type="text" class="form-control mb-2" formControlName="phoneNo" placeholder="Phone No" />
-              <input type="text" class="form-control mb-2" formControlName="address" placeholder="Address" />
-            </div>
-            <div class="col-md-6">
-              <select class="form-select mb-2" formControlName="gender">
-                <option value="">Select Gender</option>
-                <option *ngFor="let g of GenderTypes" [value]="g">{{ g }}</option>
-              </select>
-              <input type="text" class="form-control mb-2" formControlName="citizenshipNo" placeholder="Citizenship No" />
-              <input type="date" class="form-control mb-2" formControlName="dateOfBirth" />
-              <select class="form-select mb-2" formControlName="religion">
-                <option value="">Select Religion</option>
-                <option *ngFor="let r of Religons" [value]="r">{{ r }}</option>
-              </select>
-              <input type="email" class="form-control mb-2" formControlName="email" placeholder="Email" />
-            </div>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-        <button class="btn btn-primary" (click)="submit()" data-bs-dismiss="modal">
-          {{ PatientData ? 'Update' : 'Register' }}
-        </button>
-      </div>
     </div>
   </div>
 </div>

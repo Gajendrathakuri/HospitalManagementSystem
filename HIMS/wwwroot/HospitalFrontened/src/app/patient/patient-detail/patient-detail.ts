@@ -1,7 +1,12 @@
-import { Component, importProvidersFrom, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { PatientDto } from '../../core/Dtos/AddPatientDtos';
-import { Router } from '@angular/router';
+import {
+  Component,
+  importProvidersFrom,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
+import { IpatientReponse } from '../../core/types/patient';
 
 @Component({
   selector: 'app-patient-detail',
@@ -9,15 +14,13 @@ import { Router } from '@angular/router';
   templateUrl: './patient-detail.html',
   styleUrl: './patient-detail.css',
 })
-export class PatientDetail  {
+export class PatientDetail implements OnChanges {
+  @Input() curr: IpatientReponse | undefined;
 
-@Input() Currentpatient:any={
-  name:"Gajendra",
-  address:"kailali",
-  gender:"male",
-  age:10,
-
-}
-
-  
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['curr'] && this.curr) {
+      console.log(this.curr, 'received in child');
+      console.log('hello wolrld');
+    }
+  }
 }

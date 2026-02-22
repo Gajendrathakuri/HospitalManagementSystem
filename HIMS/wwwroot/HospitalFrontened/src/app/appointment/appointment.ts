@@ -1,5 +1,5 @@
 
-import { Component, Query } from '@angular/core';
+import { Component, OnInit, Query } from '@angular/core';
 import { ListAllpatient } from "../patient/list-allpatient/list-allpatient";
 import { TableComponent } from "../shared/Components/table-component/table-component";
 import { ColDef } from 'ag-grid-community';
@@ -7,6 +7,8 @@ import { AgGridModule } from 'ag-grid-angular';
 
 import { Router, RouterOutlet } from '@angular/router';
 import { routes } from '../app.routes';
+import { IpatientReponse } from '../core/types/patient';
+import { PatientService } from '../core/services/PatientService';
 
 type tpat={
   name:string,
@@ -19,23 +21,22 @@ type tpat={
   templateUrl: './appointment.html',
   styleUrl: './appointment.css',
 })
-export class Appointment {
+export class Appointment  implements OnInit{
 
+Rowdata:IpatientReponse[]=[];
+ constructor(private router:Router,private patientservice:PatientService){}
 
-  constructor(private router:Router){}
-
-Rowdata=[
-  {Name:"Gajendra singh ",Address:"kailali ",Age:14},
-
-  {Name:"Hari",Address:"ktm",Age:30}
-]
-
+ngOnInit(): void {
+  this.patientservice.ListAllPatients().subscribe((res)=>{
+       this.Rowdata=res;
+  })
+}
 
     cols:ColDef[]=[
-      {headerName:"Name",field:"Name",filter:true},
-      {field:"Address"},
-      {field:"Age"},
-      {field:"ContactNo",},
+      {headerName:"Name",field:"name",filter:true},
+      {headerName:"Address",field:"address"},
+      {headerName:"Age", field:"age"},
+      {headerName:"phohneNo",field:"phoneNo",},
       {headerName:"Actions",
         field:"action",
         cellRenderer:(params:any)=>{
@@ -44,16 +45,11 @@ Rowdata=[
           const BookAppointment=document.createElement('button');
         BookAppointment.className='btn me-2  btn-primary m-auto',
           BookAppointment.textContent="Book"
-
-          const cancelbutton=document.createElement('button');
-          cancelbutton.className='btn gap-3 btn-danger',
-          cancelbutton.textContent="Cancel"
            BookAppointment.onclick=()=>{
-            this.router.navigate(['appointment/bookappointment',params.data.Name]);
+            this.router.navigate(['appointment/bookappointment',params.data.id]);
            }
           
           container.appendChild(BookAppointment);
-          container.appendChild(cancelbutton);
           return container;
         }
       },
