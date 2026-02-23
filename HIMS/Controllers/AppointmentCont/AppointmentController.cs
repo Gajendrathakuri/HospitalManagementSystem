@@ -17,11 +17,13 @@ namespace HIMS.Controllers.AppointmentCont
         }
 
         //GetAllAppointment
+        [HttpGet]
         public async Task<IActionResult> ListAllAppointment()
         {
             return Ok(await _appointmentservice.ListAllAppointment());
         }
 
+        [HttpPost]
             // createing appointment
         public async Task<IActionResult> CreateAppointment([FromBody] CreateAppointmentDtos appointmentcreate)
         {
@@ -29,6 +31,7 @@ namespace HIMS.Controllers.AppointmentCont
             return Ok(result);
         }
 
+        [HttpDelete("{id}")]
         // Canceling Appointment
         public async Task<IActionResult> CancelAppointment(Guid id)
         {

@@ -7,7 +7,7 @@ namespace HIMS.Extensions
         public static IServiceCollection defaultcors(this IServiceCollection service)
         {
            
-            services.AddCors(options =>
+            service.AddCors(options =>
             {
                 options.AddPolicy("AllowAll", builder =>
                 {
@@ -18,7 +18,7 @@ namespace HIMS.Extensions
                 });
             });
 
-            return services;
+            return service;
 
         }
     }
