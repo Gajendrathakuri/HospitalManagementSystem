@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
-import { GenderTypes, IpatientReponse, ReligionTypes } from '../../core/types/patient';
 import { NgForOf } from '@angular/common';
-import { PatientDto } from '../../core/Dtos/AddPatientDtos';
+import { GenderTypes } from '../../core/Dtos/AddPatientDtos';
 import { FormBuilder, FormGroup, ɵInternalFormsSharedModule, ReactiveFormsModule } from '@angular/forms';
+import { ReligionTypes } from '../../core/types/patient';
 
 @Component({
   selector: 'app-patient-update',
@@ -22,7 +22,7 @@ export class PatientUpdate implements OnChanges {
     this.formdata=this.fb.group(
       {
         name:[''],
-        age: [''],
+      age: [''],
       gender: [''],
       address: [''],
       phoneNo: [''],
@@ -35,12 +35,10 @@ export class PatientUpdate implements OnChanges {
       symptoms: [[]]
       }
     )
-    console.log(this.formdata);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['Patient'] && this.Patient) {
-       
       console.log(this.Patient);
       this.formdata.patchValue(this.Patient);
     }

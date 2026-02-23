@@ -24,10 +24,7 @@ export class TableComponent {
 
   @Output() rowClicked = new EventEmitter<any>();
 
-  selectedRow: any = null; // Store clicked row
-
   onRowClick(event: any) {
      this.rowClicked.emit(event.data); 
-
   }
 }

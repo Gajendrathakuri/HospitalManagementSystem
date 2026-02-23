@@ -7,6 +7,7 @@ import { Appointment } from './appointment/appointment';
 import { AppointRoute } from './appointment/AppointRoute.routes';
 import { Dashboard } from './dashboard/dashboard';
 import { Routes } from '@angular/router';
+import { Staff } from './staff/staff';
 
 
 export const routes: Routes = [
@@ -24,8 +25,12 @@ export const routes: Routes = [
       },
       {
         path:"appointment",
-    loadChildren:()=>import('./appointment/AppointRoute.routes').then((e)=>e.AppointRoute) }
-
+    loadChildren:()=>import('./appointment/AppointRoute.routes').then((e)=>e.AppointRoute) 
+  },
+  {
+    path:"staff",
+    component:Staff
+  }
     ],
   },
   

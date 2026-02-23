@@ -5,7 +5,7 @@ import { TableComponent } from "../shared/Components/table-component/table-compo
 import { ColDef } from 'ag-grid-community';
 import { AgGridModule } from 'ag-grid-angular';
 
-import { Router, RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet, RouterLink } from '@angular/router';
 import { routes } from '../app.routes';
 import { IpatientReponse } from '../core/types/patient';
 import { PatientService } from '../core/services/PatientService';
@@ -16,7 +16,7 @@ type tpat={
 }
 @Component({
   selector: 'app-appointment',
-  imports: [AgGridModule, TableComponent],
+  imports: [AgGridModule, TableComponent, RouterLink],
 
   templateUrl: './appointment.html',
   styleUrl: './appointment.css',

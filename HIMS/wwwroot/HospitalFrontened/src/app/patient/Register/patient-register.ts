@@ -1,11 +1,11 @@
-import { GenderTypes, ReligionTypes } from '../../core/types/patient';
-import { PatientDto } from '../../core/Dtos/AddPatientDtos';
+import { GenderTypes, PatientDto } from '../../core/Dtos/AddPatientDtos';
 import { NgFor, NgIf } from '@angular/common';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { ListAllpatient } from "../list-allpatient/list-allpatient";
 import { RtcNepaliDatePickerModule } from '@rishovt/angular-nepali-datepicker';
 import { PatientService } from '../../core/services/PatientService';
+import { ReligionTypes } from '../../core/types/patient';
 @Component({
   selector: 'app-patientregister',
   standalone:true,
@@ -101,7 +101,11 @@ constructor(private patientservice:PatientService){
   }
  submit() {
   console.log(this.form.controls);
-    console.log(this.getPatientDto());
+    this.form.markAllAsTouched();
+
+    if(this.form.invalid){
+      return;
+    }
     this.patientservice.AddPatients(this.getPatientDto()).subscribe((res=>{
       console.log(res);
     }));

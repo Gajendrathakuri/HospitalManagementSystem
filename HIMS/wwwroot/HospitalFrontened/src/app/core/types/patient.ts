@@ -1,3 +1,6 @@
+import { GenderTypes } from "../Dtos/AddPatientDtos";
+
+
 //GetpatientResponse 
 export interface IpatientReponse{
   id?: string;          
@@ -14,11 +17,7 @@ export interface IpatientReponse{
   disease?: string;
 }
 
-export enum GenderTypes{
-  Male="Male",
-  Female="Female",
-  Others="Others"
-}
+
 
 export enum ReligionTypes {
   Hindu = 'Hindu',
