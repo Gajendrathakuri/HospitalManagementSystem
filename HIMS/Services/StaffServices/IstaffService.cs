@@ -7,6 +7,7 @@ namespace HIMS.Services.StaffServices
     {
         Task<IEnumerable<Staff>> ListAllStaff();
         Task<Staff> CreateNewStaff(CreateStaffDto staffcreate);
+        Task<List<Staff>> GetDoctors();
 
     }
 }

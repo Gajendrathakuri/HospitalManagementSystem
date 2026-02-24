@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HIMS.Migrations
 {
     [DbContext(typeof(Appdbcontext))]
-    [Migration("20260217100736_Initial")]
+    [Migration("20260223093552_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -40,6 +40,9 @@ namespace HIMS.Migrations
                     b.Property<Guid>("DepartmentId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<int?>("DepartmentId1")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("DischargedDate")
                         .HasColumnType("datetime2");
 
@@ -51,7 +54,7 @@ namespace HIMS.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DepartmentId");
+                    b.HasIndex("DepartmentId1");
 
                     b.HasIndex("PatientId");
 
@@ -131,9 +134,11 @@ namespace HIMS.Migrations
 
             modelBuilder.Entity("HIMS.Models.Departments.Department", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("BuildingBlock")
                         .HasColumnType("nvarchar(max)");
@@ -141,15 +146,42 @@ namespace HIMS.Migrations
                     b.Property<string>("DepartmentName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("Departmenttype")
-                        .HasColumnType("int");
-
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.ToTable("Department");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            BuildingBlock = "Block A ",
+                            DepartmentName = "Pharmacy",
+                            Description = "Bills and Medicines"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            BuildingBlock = "Block B",
+                            DepartmentName = "Lab",
+                            Description = "Tests and Lab Reports"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            BuildingBlock = "Block C",
+                            DepartmentName = "Opd",
+                            Description = "Visit For Doctors and Patient Checkup"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            BuildingBlock = "Block D",
+                            DepartmentName = "ICU",
+                            Description = "Serious patient"
+                        });
                 });
 
             modelBuilder.Entity("HIMS.Models.DoctorModel.Doctor", b =>
@@ -174,8 +206,8 @@ namespace HIMS.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("DepartmentId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("DepartmentId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
@@ -335,8 +367,8 @@ namespace HIMS.Migrations
                     b.Property<DateTime?>("DateofBirth")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("DepartmentId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("DepartmentId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
@@ -374,9 +406,7 @@ namespace HIMS.Migrations
                 {
                     b.HasOne("HIMS.Models.Departments.Department", "Department")
                         .WithMany()
-                        .HasForeignKey("DepartmentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("DepartmentId1");
 
                     b.HasOne("HIMS.Models.PatientModels.Patient", "Patient")
                         .WithMany("Admission")

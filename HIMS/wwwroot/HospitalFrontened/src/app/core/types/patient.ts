@@ -18,7 +18,6 @@ export interface IpatientReponse{
 }
 
 
-
 export enum ReligionTypes {
   Hindu = 'Hindu',
   Muslim = 'Muslim',

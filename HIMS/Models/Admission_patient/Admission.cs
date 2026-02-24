@@ -15,9 +15,6 @@ namespace HIMS.Models.Admission_patient
 
         public Models.PatientModels.Patient? Patient { get; set; }
 
-        public Guid DepartmentId { get; set; }
-        public Department? Department { get; set; }
-
         public WardTypes WardType { get; set; }
            public int BedNo { get; set; }
 

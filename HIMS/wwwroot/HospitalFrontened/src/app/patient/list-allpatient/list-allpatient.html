@@ -1,6 +1,5 @@
 <div class="container-fluid mx-auto">
   <app-tablecomponent
-  *ngIf="AllPatient.length>0"
     [data]="AllPatient"
     [columns]="patientColumns"
     (rowClicked)="onRowSelected($event)"

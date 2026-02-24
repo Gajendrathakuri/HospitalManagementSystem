@@ -14,8 +14,7 @@ export const sidebarData=[
     {
         name:"Appointment",
         icon:"appointment",
-        path:"/appointment",
-
+        path:"/Appointment",
     },
     {
         name:"Staff",

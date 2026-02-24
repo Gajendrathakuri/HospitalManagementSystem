@@ -6,9 +6,9 @@ namespace HIMS.Services.Dtos.AppointmentDtos
     {
         public string Title { get; set; }
         public Guid PatientId {get;set;}
-        public Guid DoctorId { get; set; }
+        public Guid StaffId { get; set; }
         public AppointmentStatus appointmentStatus { get; set; } = AppointmentStatus.Pending;
-        public DateTime AppointmentDate { get; set; } 
+        public DateOnly AppointmentDate { get; set; } 
         public TimeOnly AppointmentTime { get; set; } 
         
     }
