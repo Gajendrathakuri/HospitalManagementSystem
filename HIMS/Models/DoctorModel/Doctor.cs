@@ -11,7 +11,7 @@ namespace HIMS.Models.DoctorModel
        
         public string Speacialization { get; set; }
         public string Degree { get; set; }
-        public Guid DepartmentId { get; set; }
+        public int DepartmentId { get; set; }
 
         [ForeignKey("DepartmentId")]
         public Department Department { get; set; }

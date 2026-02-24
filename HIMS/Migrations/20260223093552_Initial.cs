@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace HIMS.Migrations
 {
     /// <inheritdoc />
@@ -15,10 +17,10 @@ namespace HIMS.Migrations
                 name: "Department",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     DepartmentName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Departmenttype = table.Column<int>(type: "int", nullable: true),
                     BuildingBlock = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
@@ -74,7 +76,7 @@ namespace HIMS.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Speacialization = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Degree = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DepartmentId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    DepartmentId = table.Column<int>(type: "int", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     City = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -101,7 +103,7 @@ namespace HIMS.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Profile = table.Column<int>(type: "int", nullable: false),
-                    DepartmentId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    DepartmentId = table.Column<int>(type: "int", nullable: false),
                     AccountNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Salary = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     JoinedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -133,6 +135,7 @@ namespace HIMS.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     PatientId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     DepartmentId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    DepartmentId1 = table.Column<int>(type: "int", nullable: true),
                     WardType = table.Column<int>(type: "int", nullable: false),
                     BedNo = table.Column<int>(type: "int", nullable: false),
                     AdmissionDate = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -142,11 +145,10 @@ namespace HIMS.Migrations
                 {
                     table.PrimaryKey("PK_Admission", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Admission_Department_DepartmentId",
-                        column: x => x.DepartmentId,
+                        name: "FK_Admission_Department_DepartmentId1",
+                        column: x => x.DepartmentId1,
                         principalTable: "Department",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Admission_patients_PatientId",
                         column: x => x.PatientId,
@@ -237,10 +239,21 @@ namespace HIMS.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.InsertData(
+                table: "Department",
+                columns: new[] { "Id", "BuildingBlock", "DepartmentName", "Description" },
+                values: new object[,]
+                {
+                    { 1, "Block A ", "Pharmacy", "Bills and Medicines" },
+                    { 2, "Block B", "Lab", "Tests and Lab Reports" },
+                    { 3, "Block C", "Opd", "Visit For Doctors and Patient Checkup" },
+                    { 4, "Block D", "ICU", "Serious patient" }
+                });
+
             migrationBuilder.CreateIndex(
-                name: "IX_Admission_DepartmentId",
+                name: "IX_Admission_DepartmentId1",
                 table: "Admission",
-                column: "DepartmentId");
+                column: "DepartmentId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Admission_PatientId",

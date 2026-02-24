@@ -1,3 +1,4 @@
+using HIMS.Datas;
 using HIMS.Models.Admission_patient;
 using HIMS.Models.Appointment;
 using HIMS.Models.Billing;
@@ -25,5 +26,13 @@ namespace HIMS.dbconfig
         public DbSet<Appointment> appointment { get; set; }
         public DbSet<Staff> staff { get; set; }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            DepartmentDataseed.Seed(modelBuilder);
+        }
+
     };
+
+    
 }

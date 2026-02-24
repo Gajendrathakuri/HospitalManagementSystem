@@ -1,7 +1,10 @@
 ﻿using HIMS.dbconfig;
+using HIMS.Models.DoctorModel;
+using HIMS.Models.Staff;
 using HIMS.Models.StaffModel;
 using HIMS.Services.Dtos;
 using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 namespace HIMS.Services.StaffServices
 {
@@ -14,7 +17,8 @@ namespace HIMS.Services.StaffServices
         {
             _dbcontext = dbcontext;
         }
-       //listall staffs
+
+     
         public async Task<IEnumerable<Staff>>  ListAllStaff()
         {
             return (await _dbcontext.staff.ToListAsync());
@@ -37,5 +41,12 @@ namespace HIMS.Services.StaffServices
             await _dbcontext.SaveChangesAsync();
             return newStafff;
         }
+
+         public async Task<List<Staff>> GetDoctors()
+        {
+            var doctors = await _dbcontext.staff.Where(s => s.Profile == ProfileTypes.Doctor).ToListAsync();
+            return doctors;
+        }
+
     }
 }
