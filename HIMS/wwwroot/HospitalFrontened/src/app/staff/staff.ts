@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 import { StaffFormComponent } from "./staff-form-component/staff-form-component";
 import * as bootstrap from 'bootstrap';
-import { NgIf } from '@angular/common';
 @Component({
   selector: 'app-staff',
-  imports: [StaffFormComponent, NgIf],
+  imports: [StaffFormComponent],
   templateUrl: './staff.html',
   styleUrl: './staff.css',
 })
