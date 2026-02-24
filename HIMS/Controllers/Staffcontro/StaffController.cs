@@ -1,4 +1,5 @@
 ﻿
+using HIMS.Models.StaffModel;
 using HIMS.Services.Dtos;
 using HIMS.Services.StaffServices;
 using Microsoft.AspNetCore.Mvc;
@@ -26,6 +27,13 @@ namespace HIMS.Controllers.Staffcontro
         public async Task<IActionResult> CreatenewStaff(CreateStaffDto staffdto)
         {
             return Ok(await _staffservice.CreateNewStaff(staffdto));
+        }
+
+        [HttpGet("Doctors")]
+        
+        public async Task<IActionResult> GetAllDoctors()
+        {
+            return Ok(await _staffservice.GetDoctors());
         }
 
     }

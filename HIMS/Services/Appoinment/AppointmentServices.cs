@@ -1,9 +1,8 @@
 ﻿using HIMS.dbconfig;
 using HIMS.Models.Appointment;
 using HIMS.Services.Dtos.AppointmentDtos;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Identity.Client;
+
 
 namespace HIMS.Services.Appoinment
 {
@@ -19,7 +18,8 @@ namespace HIMS.Services.Appoinment
         
             var appointments = await _appdbcontext.appointment
                 .Select(a => new AppointResponseDtos
-                {
+                {   Appointmentid=a.Id,
+                    Appointmentstatus=a.AppointmentStatus,
                     AppointmentDate = a.AppointmentDate,
                     AppointmentTime = a.AppointmentTime,
                     PatientName = a.Patient.Name,
@@ -50,13 +50,13 @@ namespace HIMS.Services.Appoinment
         {
             var newAppointment = new Appointment
             {
-                Title = createAppointment.Title,
-                AppointmentDate = createAppointment.AppointmentDate,
+                    Title= createAppointment.Title,
+                AppointmentDate= createAppointment.AppointmentDate,
                 AppointmentTime = createAppointment.AppointmentTime,
                 PatientId = createAppointment.PatientId,
-                DoctorId = createAppointment.DoctorId,
+                StaffId = createAppointment.StaffId,
             };
-            _appdbcontext.appointment.Add(newAppointment);
+               await _appdbcontext.appointment.AddAsync(newAppointment);
             await  _appdbcontext.SaveChangesAsync();
             return newAppointment; 
         }

@@ -17,11 +17,22 @@ namespace HIMS.Controllers.AppointmentCont
         }
 
         //GetAllAppointment
+        [HttpGet]
         public async Task<IActionResult> ListAllAppointment()
         {
-            return Ok(await _appointmentservice.ListAllAppointment());
+            var appointments = await _appointmentservice.ListAllAppointment();
+            if (appointments == null)
+            {
+                return NotFound(new
+                {
+                    message = "Cannot find Any appointment"
+                });
+            }
+
+            return Ok(appointments);
         }
 
+        [HttpPost]
             // createing appointment
         public async Task<IActionResult> CreateAppointment([FromBody] CreateAppointmentDtos appointmentcreate)
         {
@@ -29,6 +40,7 @@ namespace HIMS.Controllers.AppointmentCont
             return Ok(result);
         }
 
+        [HttpDelete("{id}")]
         // Canceling Appointment
         public async Task<IActionResult> CancelAppointment(Guid id)
         {
@@ -37,7 +49,21 @@ namespace HIMS.Controllers.AppointmentCont
                 return BadRequest(new { message = $"{id} with this person not found" });
             }
 
-            return Ok(await _appointmentservice.CancelAppointment(id));
+            var isCanceled = await _appointmentservice.CancelAppointment(id);
+            if (isCanceled)
+            {
+                return Ok(new
+                {
+                    message = "successfully Cancelled"
+                });
+            }
+            else
+            {
+                return BadRequest(new
+                {
+                    message = "already cancelled"
+                });
+            }
         }
 
 

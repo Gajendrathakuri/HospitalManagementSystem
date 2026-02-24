@@ -13,7 +13,7 @@ namespace HIMS.Services.Dtos
         public DateTime? DateOfBirth { get; set; }
         public GenderTypes Gender { get; set; }
         public ProfileTypes Profile { get; set; }
-        public Guid DepartmentId { get; set; }
+        public int DepartmentId { get; set; }
         public string? AccountNumber { get; set; }
         public decimal Salary { get; set; }
         public DateTime JoinedDate { get; set; }
