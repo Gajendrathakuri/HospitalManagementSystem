@@ -12,7 +12,7 @@ namespace HIMS.Extensions
                 options.AddPolicy("AllowAll", builder =>
                 {
                     builder
-                        .AllowAnyOrigin()
+                        .WithOrigins("http://localhost:4200")
                         .AllowAnyHeader()
                         .AllowAnyMethod();
                 });
