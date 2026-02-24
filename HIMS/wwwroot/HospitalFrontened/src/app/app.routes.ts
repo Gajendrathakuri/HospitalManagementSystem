@@ -1,9 +1,14 @@
-import { Routes } from '@angular/router';
+
+
 import { Layout } from './layout/layout';
-import { Sidedbar } from './layout/sidedbar/sidedbar';
-import { Header } from './layout/header/header';
-import {  PatientRegister } from './patient/Register/patient-register';
 import { Patientlayout } from './patient/patientlayout/patientlayout';
+import { PatientRoute } from './patient/patient.route';
+import { Appointment } from './appointment/appointment';
+import { AppointRoute } from './appointment/AppointRoute.routes';
+import { Dashboard } from './dashboard/dashboard';
+import { Routes } from '@angular/router';
+import { Staff } from './staff/staff';
+
 
 export const routes: Routes = [
   {
@@ -12,16 +17,23 @@ export const routes: Routes = [
     children: [
       {
         path: 'dashboard',
-        loadComponent: () =>
-          import('./dashboard/dashboard').then((e)=>e.Dashboard),
+        component:Dashboard
       },
       {
-        path:"patient",
-        component:Patientlayout,
+        path: 'patient',
+        loadChildren:()=>import('./patient/patient.route').then(e=>e.PatientRoute),
       },
-      { path: '', redirectTo: 'patient', pathMatch: 'full' },
-      {path:"patient",component:Patientlayout}
+      {
+        path:"appointment",
+    loadChildren:()=>import('./appointment/AppointRoute.routes').then((e)=>e.AppointRoute) 
+  },
+  {
+    path:"staff",
+    component:Staff
+  }
     ],
   },
+  
   { path: '**', redirectTo: '' },
 ];
+

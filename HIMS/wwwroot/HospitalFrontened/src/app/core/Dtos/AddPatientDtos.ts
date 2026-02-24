@@ -1,6 +1,10 @@
 // patient.dto.ts
 
-export type GenderTypes = 'Male' | 'Female' | 'Others';
+export enum GenderTypes{
+  Male=0,
+  Female=1,
+  Other=2
+}
 
 export interface PatientDto {
   dateOfBirth?: Date;

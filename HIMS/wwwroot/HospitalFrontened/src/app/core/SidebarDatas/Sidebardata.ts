@@ -19,16 +19,19 @@ export const sidebarData=[
     {
         name:"Staff",
         icon:"staff",
-        path:"/Staff",
+        path:"/staff",
+
     },
     {
         name:"Dispensary",
         icon:"medicine",
-        path:"/Dispensary"
+        path:"/sispensary"
+
     },
     {
         name:"Setting",
         icon:"setting",
-        path:'/Setting'
+     path:'/setting'
+
     }
 ]

@@ -1,0 +1,55 @@
+<div class="container h-100 d-flex align-items-center">
+  <div class="row d-flex w-100 align-items-center justify-content-center ">
+    <div class="col-7 ">
+      <app-patient-detail> </app-patient-detail>
+    </div>
+    <div class="col-3 ">
+      <h6>Book Appointment</h6>
+      <form [formGroup]="form">
+        <!-- time -->
+        <div>
+          <label for="time" class="form-label">Time </label>
+          <input id="time" class="form-control" formControlName="time" type="time" placeholder="Time" />
+          @if (f['time'].invalid && (f['time']?.touched || f['time'].dirty)) {
+            @if (f['time']?.errors?.['required']) {
+                <span class="text-danger"> Time is Required</span>
+            }
+          }
+        </div>
+        <!-- date -->
+         <div>
+            <label for="date" class="form-label">Date</label>
+            <input type="date" id="date" class="form-control ">
+         </div>
+          @if (f['bookDate'].invalid && (f['bookDate']?.touched || f['bookDate'].dirty)) {
+            @if (f['bookDate']?.errors?.['required']) {
+                <span class="text-danger"> Date  is Required</span>
+            }
+          }
+         <!-- doctor -->
+          <div class="mt-3">
+            
+              <select class="form-select" formControlName="doctorid">
+                <option value="">Select Doctor</option>
+
+                <option *ngFor="let doc of Doctors" [value]="doc">
+                  {{ doc }}
+                </option>
+              </select>
+              
+            </div>
+            <!-- appointmennt reason -->
+             <div class="mt-2">
+            <label for="apr" class="form-label">Appointment Reason</label>
+             <input id="apr" type="text" class="form-control" formControlName="reason">
+
+             </div>
+             
+      </form>
+      <!-- Appointment Book -->
+       <div (click)="appointment()" class="btn  m-2 btn-primary d-flex mt-4  justify-content-center ">
+        Book Appointment
+       </div>
+    </div>
+  </div>
+</div>
