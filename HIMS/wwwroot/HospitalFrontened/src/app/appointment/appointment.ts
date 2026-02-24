@@ -16,7 +16,7 @@ type tpat={
 }
 @Component({
   selector: 'app-appointment',
-  imports: [AgGridModule, TableComponent, RouterLink],
+  imports: [AgGridModule, RouterLink],
 
   templateUrl: './appointment.html',
   styleUrl: './appointment.css',
