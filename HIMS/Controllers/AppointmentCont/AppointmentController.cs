@@ -20,7 +20,16 @@ namespace HIMS.Controllers.AppointmentCont
         [HttpGet]
         public async Task<IActionResult> ListAllAppointment()
         {
-            return Ok(await _appointmentservice.ListAllAppointment());
+            var appointments = await _appointmentservice.ListAllAppointment();
+            if (appointments == null)
+            {
+                return NotFound(new
+                {
+                    message = "Cannot find Any appointment"
+                });
+            }
+
+            return Ok(appointments);
         }
 
         [HttpPost]
@@ -40,7 +49,21 @@ namespace HIMS.Controllers.AppointmentCont
                 return BadRequest(new { message = $"{id} with this person not found" });
             }
 
-            return Ok(await _appointmentservice.CancelAppointment(id));
+            var isCanceled = await _appointmentservice.CancelAppointment(id);
+            if (isCanceled)
+            {
+                return Ok(new
+                {
+                    message = "successfully Cancelled"
+                });
+            }
+            else
+            {
+                return BadRequest(new
+                {
+                    message = "already cancelled"
+                });
+            }
         }
 
 
