@@ -1,8 +1,4 @@
-
-
-
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-
 import { AgGridAngular } from "ag-grid-angular";
 
 @Component({
@@ -24,7 +20,8 @@ export class TableComponent {
 
   @Output() rowClicked = new EventEmitter<any>();
 
+  selectedRow: any = null; // Store clicked row
+
   onRowClick(event: any) {
-     this.rowClicked.emit(event.data); 
   }
 }
