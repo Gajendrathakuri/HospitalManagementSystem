@@ -1,3 +1,4 @@
+
 import { Component, EventEmitter, Input, OnInit, Output, Query } from '@angular/core';
 import { IpatientReponse } from '../../core/types/patient';
 import { PatientService } from '../../core/services/PatientService';

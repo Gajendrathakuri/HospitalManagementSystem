@@ -5,7 +5,7 @@ import { CardComponent } from "../shared/Components/card-component/card-componen
 
 @Component({
   selector: 'app-dashboard',
-  imports: [RouterOutlet, CardComponent],
+  imports: [RouterOutlet, TableComponent, CardComponent],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
 })
