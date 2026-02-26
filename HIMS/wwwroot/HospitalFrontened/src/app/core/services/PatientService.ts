@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IpatientReponse ,IPatient} from '../types/patient';
+import { PatientDto } from '../Dtos/AddPatientDtos';
 
 @Injectable({
   providedIn: 'root',
@@ -14,12 +15,12 @@ export class PatientService {
     return this.http.get<IpatientReponse[]>(this.base_url+"Patient")
    }
  //createpatient
- AddPatients(patient:IPatient ):Observable<IpatientReponse>{
+ AddPatients(patient:PatientDto ):Observable<IpatientReponse>{
   return this.http.post<IpatientReponse>(this.base_url,patient);
  }
  //deletepatient
 Deletepatient(id:any):Observable<any>{
-  return this.http.delete<any>(this.base_url+id);
+  return this.http.delete<any>(this.base_url+"patient/"+id);
 }
  //updatepatients
 Upatepatient(id:string | number ,patient:IPatient):Observable<IpatientReponse>{

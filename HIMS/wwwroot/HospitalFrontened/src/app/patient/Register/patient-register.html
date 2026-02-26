@@ -7,7 +7,7 @@
         <div class="row">
           <div class="col-4">
             <!-- fullname -->
-            <div class="mt-3">
+            <!-- <div class="mt-3">
               <label for="name" class="form-label"
                 >FullName <span class="text-danger">*</span></label
               >
@@ -24,6 +24,32 @@
                   }
                 </div>
               }
+            </div> -->
+            <!-- Name -->
+            <div class="mb-3">
+              <label class="form-label">Full Name</label>
+              <input type="text" class="form-control" formControlName="name" />
+              <div
+                class="text-danger"
+                *ngIf="f['name'].invalid && (f['name'].touched || f['name'].dirty)"
+              >
+                <div *ngIf="f['name'].errors?.['required']">Name is required</div>
+                <div *ngIf="f['name'].errors?.['minlength']">
+                  Name must be greater than 3 characters
+                </div>
+              </div>
+            </div>
+
+            <!-- Address -->
+            <div class="mb-3">
+              <label class="form-label">Address</label>
+              <input type="text" class="form-control" formControlName="address" />
+              <div
+                class="text-danger"
+                *ngIf="f['address'].invalid && (f['address'].touched || f['address'].dirty)"
+              >
+                <div *ngIf="f['address'].errors?.['required']">Address is required</div>
+              </div>
             </div>
 
             <!-- age -->
@@ -40,31 +66,21 @@
               />
               <!-- <div *ngIf="form.get('age')?.invalid && form.get('age')?.touched" class="text-danger">Age is Required </div> -->
             </div>
-
-            <!-- phone -->
-            <div class="mt-3">
-              <label for="contact" class="form-label">Contact No</label>
-              <input
-                type="text"
-                id="contact"
-                placeholder="Phone No"
-                class="form-control"
-                formControlName="phoneNo"
-              />
-            </div>
           </div>
           <div class="col-3">
-            <!-- address -->
-            <div class="mt-3">
-              <label for="add" class="form-label">Address <span class="text-danger">*</span></label>
-              <input
-                id="add"
-                type="Address"
-                placeholder="Address"
-                formControlName="address"
-                class="form-control"
-              />
+            <!-- Phone -->
+            <div class="mb-3">
+              <label class="form-label">Phone No</label>
+              <input type="text" class="form-control" formControlName="phoneNo" />
+              <div
+                class="text-danger"
+                *ngIf="f['phoneNo'].invalid && (f['phoneNo'].touched || f['phoneNo'].dirty)"
+              >
+                <div *ngIf="f['phoneNo'].errors?.['required']">Phone number is required</div>
+                <div *ngIf="f['phoneNo'].errors?.['pattern']">Phone must be exactly 10 digits</div>
+              </div>
             </div>
+
             <!-- Gender -->
             <div class="mt-3">
               <label for="gender" class="form-label">Gender </label>
@@ -111,17 +127,17 @@
                 </option>
               </select>
             </div>
-
-            <div class="mt-3">
-              <label for="email" class="form-label">Email</label>
-              <input
-                type="email"
-                id="email"
-                placeholder="Email"
-                formControlName="email"
-                [required]="false"
-                class="form-control"
-              />
+            <!-- email -->
+            <!-- Email -->
+            <div class="mb-3">
+              <label class="form-label">Email</label>
+              <input type="email" class="form-control" formControlName="email" />
+              <div
+                class="text-danger"
+                *ngIf="f['email'].invalid && (f['email'].touched || f['email'].dirty)"
+              >
+                <div *ngIf="f['email'].errors?.['email']">Enter a valid email address</div>
+              </div>
             </div>
           </div>
         </div>

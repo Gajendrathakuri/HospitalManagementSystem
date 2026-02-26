@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { ListAllpatient } from "../list-allpatient/list-allpatient";
 import { PatientRegister } from '../Register/patient-register';
+import { RouterOutlet } from '@angular/router';
 @Component({
   selector: 'app-patientlayout',
-  imports: [ListAllpatient,PatientRegister],
+  imports: [PatientRegister, ListAllpatient, RouterOutlet],
   templateUrl: './patientlayout.html',
   styleUrl: './patientlayout.css',
 })

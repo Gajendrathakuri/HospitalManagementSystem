@@ -1,34 +1,26 @@
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
-
 import { NgForOf } from '@angular/common';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { ReligionTypes } from '../../core/types/patient';
 import { GenderTypes } from '../../core/Dtos/AddPatientDtos';
-import { FormBuilder, FormGroup, ɵInternalFormsSharedModule, ReactiveFormsModule } from '@angular/forms';
-import { GenderTypes, IpatientReponse, ReligionTypes } from '../../core/types/patient';
-import { PatientDto } from '../../core/Dtos/AddPatientDtos';
-;
 
 @Component({
   selector: 'app-patient-update',
-  imports: [NgForOf, ɵInternalFormsSharedModule, ReactiveFormsModule],
+  standalone: true,
+  imports: [ ReactiveFormsModule],
   templateUrl: './patient-update.html',
   styleUrl: './patient-update.css',
 })
 export class PatientUpdate implements OnChanges {
-  GenderTypes = Object.values(GenderTypes);
-  Religions = Object.values(ReligionTypes);
   @Input() Patient: any;
-  @Output() save=new EventEmitter<any>();
+  @Output() save = new EventEmitter<any>();
 
   formdata!: FormGroup;
-  constructor(private fb:FormBuilder){
 
-    this.formdata=this.fb.group(
-      {
-        name:[''],
-
-
-        age: [''],
-
+  constructor(private fb: FormBuilder) {
+    this.formdata = this.fb.group({
+      name: [''],
+      age: [''],
       gender: [''],
       address: [''],
       phoneNo: [''],
@@ -39,25 +31,23 @@ export class PatientUpdate implements OnChanges {
       religion: [''],
       email: [''],
       symptoms: [[]]
-      }
-    )
+    });
+  }
 
-
+  // ✅ Correct lifecycle hook name
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['Patient'] && this.Patient) {
-
+    if (changes['Patient'] &&  this.Patient) {
       console.log(this.Patient);
       this.formdata.patchValue(this.Patient);
     }
   }
 
-  submit(){
-    if(this.formdata.valid){
+  submit() {
+    if (this.formdata.valid) {
       this.save.emit({
         ...this.Patient,
         ...this.formdata.value
-      })
-      
+      });
     }
   }
 }

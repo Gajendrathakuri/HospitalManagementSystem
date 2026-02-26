@@ -1,63 +1,42 @@
+<!-- 
+<div class="card shadow-sm p-3 mb-3">
+  <div class="card-header bg-primary text-white">
+    <h5 class="mb-0">Patient Details</h5>
+  </div>
 
-<!-- <div class="container mt-4"> -->
-  <h3 class="mb-3 ">Patient Details</h3>
-  <!-- <form>
-    <div class="row mb-1">
-      <label class="col-sm-3 col-form-label"><strong>Full Name</strong></label>
-      <div class="col-sm-9">
-        <input type="text" class="form-control-plaintext" readonly [value]="curr?.name">
-      </div>
+  <div class="card-body">
+    <div class="row mb-2">
+      <div class="col-md-4"><strong>Name:</strong> {{ patient.name }}</div>
+      <div class="col-md-4"><strong>Age:</strong> {{ patient.age || '-' }}</div>
+       <div class="col-md-4"><strong>Gender:</strong> {{ }}</div> 
     </div>
 
-    <div class="row mb-1">
-      <label class="col-sm-3 col-form-label"><strong>Age</strong></label>
-      <div class="col-sm-9">
-        <input type="text" class="form-control-plaintext" readonly [value]="curr?.age">
-      </div>
+    <div class="row mb-2">
+      <div class="col-md-6"><strong>Email:</strong> {{ patient?.email || '-' }}</div>
+      <div class="col-md-6"><strong>Phone:</strong> {{ patient?.phone || '-' }}</div>
     </div>
 
-    <div class="row mb-1">
-      <label class="col-sm-3 col-form-label"><strong>Gender</strong></label>
-      <div class="col-sm-9">
-        <input type="text" class="form-control-plaintext" readonly [value]="" >
-    
-      </div>
+    <div class="row mb-2">
+      <div class="col-md-6"><strong>Address:</strong> {{ patient.address || '-' }}</div>
+      <div class="col-md-6"><strong>City:</strong> {{ patient.city || '-' }}</div>
     </div>
 
-    <div class="row mb-1">
-      <label class="col-sm-3 col-form-label"><strong>Email</strong></label>
-      <div class="col-sm-9">
-        <input type="text" class="form-control-plaintext" readonly [value]="curr?.email">
-      </div>
+    <div class="row mb-2">
+      <div class="col-md-6"><strong>Citizenship No:</strong> {{ patient.citizenshipNo || '-' }}</div>
+      <div class="col-md-6"><strong>Date of Birth:</strong> {{ getFormattedDOB() }}</div>
     </div>
 
-    <div class="row mb-1">
-      <label class="col-sm-3 col-form-label"><strong>Phone</strong></label>
-      <div class="col-sm-9">
-        <input type="text" class="form-control-plaintext" readonly [value]="curr?.phoneNo">
-      </div>
+    <div class="row mb-2">
+      <div class="col-md-12"><strong>Disease:</strong> {{ patient.disease || '-' }}</div>
     </div>
 
-    <div class="row mb-1">
-      <label class="col-sm-3 col-form-label"><strong>Address</strong></label>
-      <div class="col-sm-9">
-        <textarea class="form-control-plaintext" >{{curr?.address}}</textarea>
+    <div class="row mb-2" *ngIf="patient.symptoms?.length">
+      <div class="col-md-12">
+        <strong>Symptoms:</strong>
+        <span *ngFor="let s of patient.symptoms; let i = index">
+          {{ s }}<span *ngIf="i < patient.symptoms.length - 1">, </span>
+        </span>
       </div>
     </div>
-
-    <div class="row mb-1">
-      <label class="col-sm-3 col-form-label"><strong>City</strong></label>
-      <div class="col-sm-9">
-        <textarea class="form-control-plaintext" readonly >{{curr?.city}}</textarea>
-      </div>
-    </div>
-
-    <div class="row mb-1">
-      <label class="col-sm-3 col-form-label"><strong>Citizenship No</strong></label>
-      <div class="col-sm-9">
-        <textarea class="form-control-plaintext" readonly >{{curr?.citizenshipNo}}</textarea>
-      </div>
-    </div>
-  </form>
-</div>
- -->
+  </div>
+</div>-->

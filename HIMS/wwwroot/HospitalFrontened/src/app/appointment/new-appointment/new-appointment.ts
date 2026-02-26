@@ -1,11 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { TableComponent } from "../../shared/Components/table-component/table-component";
 import { PatientDetail } from "../../patient/patient-detail/patient-detail";
 import { ActivatedRoute, Route } from '@angular/router';
 import { PatientService } from '../../core/services/PatientService';
 import { IpatientReponse } from '../../core/types/patient';
 import { NgForOf } from '@angular/common';
-import { FormControl, FormGroup, Validators, ɵInternalFormsSharedModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, Validators, ɵInternalFormsSharedModule, ReactiveFormsModule, FormBuilder } from '@angular/forms';
+import { AppointmentStatus, CreateAppointmentDto } from '../../core/Dtos/Appointmentdots/AppointmentDtos';
+import { StaffCreateDto, StaffResponseDto } from '../../core/Dtos/staff/staffdto';
+import { Staffservices } from '../../core/services/staffservices';
+import { Staff } from '../../staff/staff';
 
 @Component({
   selector: 'app-new-appointment',
@@ -14,44 +18,55 @@ import { FormControl, FormGroup, Validators, ɵInternalFormsSharedModule, Reacti
   styleUrl: './new-appointment.css',
 })
 export class NewAppointment  { 
-   patientid:any;
-   CurrentPatient:any;
-   form!:FormGroup;
- Doctors=["Ram","Shyam","Hari","Gopal"];
- 
-  constructor(private route:ActivatedRoute,private patientser:PatientService){
-    this.form=new FormGroup(
-      {
-        time:new FormControl('',[Validators.required]),
-        bookDate:new FormControl('',[Validators.required]),
-        doctorid:new FormControl('',Validators.required),
-        reason:new FormControl('')
-      }
-    );
-    this.patientid=this.route.snapshot.paramMap.get('patientId');
-   this.patientser.ListAllPatients().subscribe((res)=>{
-     this.CurrentPatient= res.find((pat)=>pat.id==this.patientid);
-     console.log(this.CurrentPatient,"selected patient");
-  });
-}
+  @Input() patient!: any;
+  @Output() appointmentCreated = new EventEmitter<CreateAppointmentDto>();
 
-get f(){
-  return this.form.controls;
-}
+  appointmentForm!: FormGroup;
+  doctors: StaffResponseDto[] = [];
 
-// validate time
+  constructor(
+    private fb: FormBuilder,
+    private staffService: Staffservices
+  ) {}
 
-isTimevalid(time:any):boolean{
-    const currenttime: string = new Date().toLocaleTimeString("en-US", {
-  hour: "numeric",
-  minute: "2-digit",
-  hour12: true,
-});
-console.log(currenttime)
-   return time>currenttime ? true:false;
-}
-// appoint
-appointment(){
-  console.log(this.isTimevalid('22:00'));
-}
+  ngOnInit(): void {
+    this.createForm();
+    this.loadDoctors();
+  }
+
+  get f() {
+    return this.appointmentForm.controls;
+  }
+
+  createForm() {
+    this.appointmentForm = this.fb.group({
+      title: ['', [Validators.required, Validators.minLength(3)]],
+      staffId: ['', Validators.required],
+      appointmentDate: ['', Validators.required],
+      appointmentTime: ['', Validators.required],
+    });
+  }
+
+  loadDoctors() {
+    this.staffService.GetAllDoctors().subscribe({
+      next: (res: StaffResponseDto[]) => this.doctors = res,
+    });
+  }
+
+  submit() {
+    this.appointmentForm.markAllAsTouched();
+
+    if (this.appointmentForm.invalid) return;
+
+    const appointment: CreateAppointmentDto = {
+      title: this.f['title'].value,
+      patientId: this.patient.patientId,
+      staffId: this.f['staffId'].value,
+      appointmentDate: this.f['appointmentDate'].value,
+      appointmentTime: this.f['appointmentTime'].value,
+      appointmentStatus: AppointmentStatus.Pending
+    };
+
+    this.appointmentCreated.emit(appointment);
+  }
 }

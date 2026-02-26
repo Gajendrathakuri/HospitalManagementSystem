@@ -1,5 +1,5 @@
-import { GenderTypes } from "../AddPatientDtos";
-
+import { GenderTypes } from '../AddPatientDtos';
+import { DepartmentDto } from '../Department/DepartmentDto';
 
 export interface StaffCreateDto {
   name: string;
@@ -12,14 +12,11 @@ export interface StaffCreateDto {
   email?: string;
   profile: StaffProfiles;
   departmentId: string;
-
   accountNumber?: string;
   salary: number;
-
   joinedDate: Date;
   leaveDate?: Date;
 }
-
 
 export enum StaffProfiles {
   Doctor = 1,
@@ -29,5 +26,28 @@ export enum StaffProfiles {
   Lab,
   Receptionist,
   SecurityGuards,
-  CleaningWorker
+  CleaningWorker,
+}
+
+export interface StaffResponseDto {
+  id: string;
+  name: string;
+  address?: string;
+  city?: string;
+  phoneNo?: string;
+  dateofBirth?: string;
+  age: number;
+  gender: GenderTypes;
+  email?: string;
+
+  profile: StaffProfiles;
+
+  departmentId: number;
+  department?: DepartmentDto;
+
+  accountNumber?: string;
+  salary: number;
+
+  joinedDate: string;
+  leaveDate: string;
 }
