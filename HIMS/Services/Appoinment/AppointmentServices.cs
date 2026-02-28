@@ -1,5 +1,6 @@
 ﻿using HIMS.dbconfig;
 using HIMS.Models.Appointment;
+using HIMS.Models.StaffModel;
 using HIMS.Services.Dtos.AppointmentDtos;
 using Microsoft.EntityFrameworkCore;
 
@@ -23,6 +24,7 @@ namespace HIMS.Services.Appoinment
                     AppointmentDate = a.AppointmentDate,
                     AppointmentTime = a.AppointmentTime,
                     PatientName = a.Patient.Name,
+                    DoctorName=a.staff.Name,
                     PatientContact = a.Patient.PhoneNo,
                     PatientAddress = a.Patient.Address,
                     PatientEmail = a.Patient.Email,

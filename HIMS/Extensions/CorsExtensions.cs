@@ -9,9 +9,9 @@ namespace HIMS.Extensions
            
             service.AddCors(options =>
             {
-                options.AddPolicy("AllowAll", builder =>
+                options.AddPolicy("AllowAll", policy=>
                 {
-                    builder
+                    policy
                         .WithOrigins("http://localhost:4200")
                         .AllowAnyHeader()
                         .AllowAnyMethod();

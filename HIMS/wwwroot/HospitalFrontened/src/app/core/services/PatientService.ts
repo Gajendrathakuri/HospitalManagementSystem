@@ -16,11 +16,7 @@ export class PatientService {
    }
  //createpatient
  AddPatients(patient:PatientDto ):Observable<IpatientReponse>{
-<<<<<<< HEAD
-  return this.http.post<IpatientReponse>(this.base_url,patient);
-=======
   return this.http.post<IpatientReponse>(this.base_url+"Patient",patient);
->>>>>>> feature/frontend
  }
  //deletepatient
 Deletepatient(id:any):Observable<any>{
