@@ -1,4 +1,4 @@
- <div class="my-4 mx-auto container-fluid">
+ <div class="my-4 mx-auto ">
   <ag-grid-angular
       style="height: 500px; ;"
       class="ag-theme-alpine"
@@ -6,9 +6,6 @@
       [columnDefs]="columns"
       [defaultColDef]="defaultColDef"
       [pagination]="true"
-      [paginationPageSize]="10"
-      [rowSelection]="'single'"
-      [animateRows]="true"
       (rowClicked)="onRowClick($event)">
   </ag-grid-angular> 
 </div> 

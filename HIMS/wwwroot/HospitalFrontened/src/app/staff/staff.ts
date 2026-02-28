@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { StaffFormComponent } from './staff-form-component/staff-form-component';
 import * as bootstrap from 'bootstrap';
 import { NgIf } from '@angular/common';
@@ -13,7 +13,7 @@ import { Departmentservice } from '../core/services/departmentservice';
 import { RouterOutlet } from '@angular/router';
 @Component({
   selector: 'app-staff',
-  imports: [StaffFormComponent, TableComponent, NgIf, RouterOutlet],
+  imports: [StaffFormComponent, TableComponent, RouterOutlet],
   templateUrl: './staff.html',
   styleUrl: './staff.css',
 })
@@ -26,6 +26,7 @@ export class Staff implements OnInit {
     private staffservice: Staffservices,
     private deptsrevice: Departmentservice,
     private toast: ToastrService,
+    private cd:ChangeDetectorRef
   ) {
     this.GetAllstaff();
     this.GetAllDepartments();
@@ -38,6 +39,7 @@ ngOnInit(): void {
     this.staffservice.GetAllStaffs().subscribe((res) => {
       console.log(res);
       this.AllStaffs = res;
+      this.cd.detectChanges();
     });
   }
 
@@ -134,15 +136,11 @@ ngOnInit(): void {
   updatehandler(event: StaffCreateDto) {
     this.staffservice.CreateNewStaff(event).subscribe({
       next: (res) => {
-        console.log(res);
-
         this.toast.success('Staff created successfully!');
         this.modalInstance.hide();
-        this.GetAllstaff();
+        this.cd.detectChanges();
       },
       error: (err) => {
-        console.error(err);
-        // Show error toast
         this.toast.error('Failed to create staff. Please try again.', 'Error');
       },
       complete: () => {},

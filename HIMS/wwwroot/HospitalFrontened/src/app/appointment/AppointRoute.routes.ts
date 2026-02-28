@@ -6,9 +6,5 @@ export const AppointRoute:Routes=[
     {
         path:"",
         component:Appointment
-    },
-    {
-        path:"bookappointment/new",
-        component:NewAppointment
     }
 ]

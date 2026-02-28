@@ -5,15 +5,10 @@
       Add New Staff
     </button>
   </div>
-  <app-tablecomponent
-  *ngIf="AllStaffs.length>0"
-  [columns]="cols"
-  [data]="AllStaffs"
-  >
-  </app-tablecomponent>
 </div>
-<router-outlet></router-outlet>
 
+<app-tablecomponent [columns]="cols" [data]="AllStaffs"> </app-tablecomponent>
+<router-outlet></router-outlet>
 <!-- Modal -->
 <div class="modal fade container-fluid w-100" id="staffModal" tabindex="-1">
   <div class="modal-dialog modal-xl">

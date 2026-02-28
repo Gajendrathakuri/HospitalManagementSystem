@@ -24,6 +24,7 @@ export interface AppointmentResponseDto {
   patientContact: string;
   patientAddress: string;
   patientEmail: string;
+  DoctorName:string;
   patientAge: number;
   appointmentStatus: AppointmentStatus;
 }

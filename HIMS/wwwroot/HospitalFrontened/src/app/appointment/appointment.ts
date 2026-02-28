@@ -1,44 +1,57 @@
-import { Component, OnInit, Query } from '@angular/core';
-import { ListAllpatient } from '../patient/list-allpatient/list-allpatient';
+import { ChangeDetectorRef, Component, OnInit, Query } from '@angular/core';
 import { TableComponent } from '../shared/Components/table-component/table-component';
-import { ColDef } from 'ag-grid-community';
+import { ColDef, ValueFormatterParams } from 'ag-grid-community';
 import { AgGridModule } from 'ag-grid-angular';
-
-import { Router, RouterOutlet, RouterLink } from '@angular/router';
-import { PatientService } from '../core/services/PatientService';
-import { AppointmentResponseDto } from '../core/Dtos/Appointmentdots/AppointmentDtos';
+import {
+  AppointmentResponseDto,
+  AppointmentStatus,
+} from '../core/Dtos/Appointmentdots/AppointmentDtos';
 import { Appointmentservice } from '../core/services/appointmentservice';
+import { NewAppointment } from './new-appointment/new-appointment';
+import * as bootstrap from 'bootstrap';
 @Component({
   selector: 'app-appointment',
-  imports: [AgGridModule, RouterLink, TableComponent],
+  imports: [AgGridModule, TableComponent, NewAppointment],
   templateUrl: './appointment.html',
   styleUrl: './appointment.css',
 })
 export class Appointment implements OnInit {
   AppointmentsData: AppointmentResponseDto[] = [];
-  constructor(private appointmentservice: Appointmentservice) {}
-
+  appointmentModel!: bootstrap.Modal;
+  constructor(private appointmentservice: Appointmentservice,
+    private cd:ChangeDetectorRef
+  ) {}
   ngOnInit(): void {
     this.GetAllAppointments();
+
   }
 
   cols: ColDef[] = [
-    { headerName: 'Name', field: 'name', filter: true },
-    { headerName: 'Address', field: 'address' },
-    { headerName: 'Age', field: 'age' },
-    { headerName: 'phohneNo', field: 'phoneNo' },
+    { headerName: 'Patient Name', field: 'patientName', filter: true },
+    { headerName: 'Address', field: 'patientAddress' },
+    { headerName: 'Age', field: 'patientAge', width: 40 },
+    { headerName: 'phohneNo', field: 'patientContact' },
+    { headerName: 'Doctor', field: 'doctorName' },
+    { headerName: 'Time', field: 'appointmentTime', width: 200 },
+    { headerName: 'Date', field: 'appointmentDate' },
     {
-      headerName: 'Actions',
-      field: 'action',
+      headerName: 'AppointmentStatus',
+      field: 'appointmentstatus',
+      valueFormatter: (param: ValueFormatterParams) => {
+        return AppointmentStatus[param.value as number];
+      },
+    },
+    {
+      headerName: 'Action', 
       cellRenderer: (params: any) => {
         const container = document.createElement('div');
         container.className = 'd-flex';
         const BookAppointment = document.createElement('button');
         ((BookAppointment.className = 'btn me-2  btn-primary m-auto'),
-          (BookAppointment.textContent = 'Book'));
-        BookAppointment.onclick = () => {
-          console.log('buttonclicked');
-        };
+          (BookAppointment.textContent = 'cancel Appointment'));
+        BookAppointment.onclick=()=>{
+          this.CancelAppointment(params.id);
+        }
 
         container.appendChild(BookAppointment);
         return container;
@@ -47,11 +60,37 @@ export class Appointment implements OnInit {
   ];
 
   GetAllAppointments() {
-    this.appointmentservice
-      .GetAllAppointments()
-      .subscribe({ next: (res) => {
+    this.appointmentservice.GetAllAppointments().subscribe({
+      next: (res) => {
+        this.AppointmentsData = res;
         console.log(res);
-        this.AppointmentsData=res;
-      } });
+        this.cd.detectChanges();
+      },
+    });
+  }
+  // cancel Appointment
+  CancelAppointment(id:string){
+    this.cd.detectChanges();
+  }
+
+  OpenModel() {
+    const mymodel = document.getElementById('appointmentModel');
+    if (!mymodel) {
+      return;
+    }
+    if (!this.appointmentModel) {
+      this.appointmentModel = new bootstrap.Modal(mymodel);
+    }
+
+    this.appointmentModel.show();
+  }
+
+  // closeModel
+
+  closeModel() {
+    if (this.appointmentModel) {
+      this.appointmentModel.hide();
+      this.GetAllAppointments();
+    }
   }
 }

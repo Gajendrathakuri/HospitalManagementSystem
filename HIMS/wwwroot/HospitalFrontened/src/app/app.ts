@@ -10,8 +10,5 @@ import { Layout } from "./layout/layout";
 })
 export class App {
   protected readonly title = signal('HospitalFrontened');
-  // loginData={
-  //   email:"",
-  //   password:""
-  // }
+
 }

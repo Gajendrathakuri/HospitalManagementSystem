@@ -1,114 +1,114 @@
 <div class="container mt-4">
-  <div class="card shadow">
-    <div class="card-header bg-primary text-white">
-      <h5 class="mb-0">Create Appointment</h5>
+  <div>
+    <div class="container mt-3">
+     <div class="mb-3">
+    <input
+      type="search"
+      class="form-control"
+      placeholder="Search Patient by Contact"
+      [(ngModel)]="searchTerm"
+      (input)="filterPatients()"
+    />
+  </div>
+  <div class="text-danger" *ngIf="!isPatientFound">No Patient with this contact Register</div>
+
     </div>
 
-    <div class="card-body">
+    <div class="">
       <form [formGroup]="appointmentForm" (ngSubmit)="submit()">
-
         <div class="row">
-
           <!-- LEFT SIDE - PATIENT DETAILS -->
           <div class="col-md-6 border-end">
-
             <h6 class="mb-3">Patient Details</h6>
 
             <div class="mb-3">
               <label class="form-label">Name</label>
-              <input type="text" class="form-control" [value]="patient?.name" readonly>
+              <input type="text" class="form-control" [value]="patient?.[0]?.name" readonly />
             </div>
 
             <div class="mb-3">
               <label class="form-label">Phone</label>
-              <input type="text" class="form-control" [value]="patient?.phoneNo" readonly>
+              <input type="text" class="form-control" [value]="patient?.[0]?.phoneNo" readonly />
             </div>
 
             <div class="mb-3">
               <label class="form-label">Email</label>
-              <input type="text" class="form-control" [value]="patient?.email" readonly>
+              <input type="text" class="form-control" [value]="patient?.[0]?.email" readonly />
             </div>
 
             <div class="mb-3">
               <label class="form-label">Address</label>
-              <input type="text" class="form-control" [value]="patient?.address" readonly>
+              <input type="text" class="form-control" [value]="patient?.[0]?.address" readonly />
             </div>
 
             <div class="mb-3">
               <label class="form-label">Age</label>
-              <input type="text" class="form-control" [value]="patient?.age" readonly>
+              <input type="text" class="form-control" [value]="patient?.[0]?.age" readonly />
             </div>
-
           </div>
 
           <!-- RIGHT SIDE - APPOINTMENT DETAILS -->
           <div class="col-md-6">
-
             <h6 class="mb-3">Appointment Details</h6>
 
             <!-- Doctor -->
             <div class="mb-3">
               <label class="form-label">Doctor</label>
-              <select class="form-select"
-                      formControlName="staffId"
-                      [class.is-invalid]="f['staffId'].touched && f['staffId'].invalid">
+              <select
+                class="form-select"
+                formControlName="staffId"
+                [class.is-invalid]="f['staffId'].touched && f['staffId'].invalid"
+              >
                 <option value="">Select Doctor</option>
-                <option *ngFor="let doc of doctors " [value]="doc.id">
+                <option *ngFor="let doc of doctors" [value]="doc.id">
                   {{ doc.name }}
                 </option>
               </select>
-              <div class="invalid-feedback">
-                Doctor is required
-              </div>
+              <div class="invalid-feedback">Doctor is required</div>
             </div>
 
             <!-- Date -->
             <div class="mb-3">
               <label class="form-label">Appointment Date</label>
-              <input type="date"
-                     class="form-control"
-                     formControlName="appointmentDate"
-                     [class.is-invalid]="f['appointmentDate'].touched && f['appointmentDate'].invalid">
-              <div class="invalid-feedback">
-                Date is required
-              </div>
+              <input
+                type="date"
+                class="form-control"
+                formControlName="appointmentDate"
+                [class.is-invalid]="f['appointmentDate'].touched && f['appointmentDate'].invalid"
+              />
+              <div class="invalid-feedback">Date is required</div>
             </div>
 
             <!-- Time -->
             <div class="mb-3">
               <label class="form-label">Appointment Time</label>
-              <input type="time"
-                     class="form-control"
-                     formControlName="appointmentTime"
-                     [class.is-invalid]="f['appointmentTime'].touched && f['appointmentTime'].invalid">
-              <div class="invalid-feedback">
-                Time is required
-              </div>
+              <input
+                type="time"
+                class="form-control"
+                formControlName="appointmentTime"
+                [class.is-invalid]="f['appointmentTime'].touched && f['appointmentTime'].invalid"
+              />
+              <div class="invalid-feedback">Time is required</div>
             </div>
 
             <!-- Reason -->
             <div class="mb-3">
               <label class="form-label">Reason to Visit</label>
-              <textarea class="form-control"
-                        rows="3"
-                        formControlName="title"
-                        [class.is-invalid]="f['title'].touched && f['title'].invalid"></textarea>
-              <div class="invalid-feedback">
-                Reason is required (minimum 3 characters)
-              </div>
+              <textarea
+                class="form-control"
+                rows="3"
+                formControlName="title"
+                [class.is-invalid]="f['title'].touched && f['title'].invalid"
+              ></textarea>
+              <div class="invalid-feedback">Reason is required (minimum 3 characters)</div>
             </div>
-
           </div>
-
         </div>
 
         <!-- Submit -->
         <div class="text-end mt-3">
-          <button type="submit" class="btn btn-primary px-4">
-            Book Appointment
-          </button>
+          <button type="submit" class="btn btn-primary px-4">Book Appointment</button>
         </div>
-
       </form>
     </div>
   </div>

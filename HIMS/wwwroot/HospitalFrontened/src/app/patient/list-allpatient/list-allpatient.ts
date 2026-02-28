@@ -1,40 +1,41 @@
-import { Component, EventEmitter, Input, OnInit, Output, Query } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, Query } from '@angular/core';
 import { IpatientReponse } from '../../core/types/patient';
 import { PatientService } from '../../core/services/PatientService';
 import { ColDef, ValueFormatterParams } from 'ag-grid-community';
 import * as bootstrap from 'bootstrap';
 import { PatientUpdate } from '../patient-update/patient-update';
 import { Router } from '@angular/router';
-
 import { ToastRef, ToastrService } from 'ngx-toastr';
-import { NgIf } from '@angular/common';
 import { AgGridAngular } from "ag-grid-angular";
 import { TableComponent } from "../../shared/Components/table-component/table-component";
 
 @Component({
   selector: 'app-list-allpatient',
-  imports: [PatientUpdate, NgIf, AgGridAngular, TableComponent],
+  imports: [PatientUpdate, TableComponent],
   templateUrl: './list-allpatient.html',
   styleUrl: './list-allpatient.css',
 })
 export class ListAllpatient implements OnInit {
   AllPatient: IpatientReponse[]= [];
+  patientToDelete?:IpatientReponse;
   constructor(
     private patientservice: PatientService,
     private router: Router,
     private toastser: ToastrService,
+    private cd:ChangeDetectorRef
   ) {}
    DeletePatientstatus: boolean = false;
   
   ngOnInit(): void {
     this.GetAllpatients();
   }
-// flag for confirm model to delete
+
  
 // get all patients
   GetAllpatients() {
     this.patientservice.ListAllPatients().subscribe((res: IpatientReponse[]) => {
       this.AllPatient = res;
+      this.cd.detectChanges();
     });
   }
   selectedRow: any = null;
@@ -49,7 +50,6 @@ export class ListAllpatient implements OnInit {
         params.value === 0 ? 'Male' : params.value === 1 ? 'Female' : 'Other',
     },
     { headerName: 'Address', field: 'address' },
-    { headerName: 'City', field: 'city' },
     { headerName: 'Phone', field: 'phoneNo' },
     { headerName: 'Citizenship No', field: 'citizenshipNo' },
     {
@@ -94,13 +94,7 @@ export class ListAllpatient implements OnInit {
   onRowSelected(rowdata: any): void {
     console.log(rowdata)
   }
-// update model
-  onUpdate(event: any) {
-    this.selectedRow = event;
-    const mymodel = document.getElementById('update')!;
-    this.modalInstance = new bootstrap.Modal(mymodel);
-    this.modalInstance.show();
-  }
+
 
   // model close
   close() {
@@ -108,27 +102,49 @@ export class ListAllpatient implements OnInit {
       this.modalInstance.hide();
     }
   }
-  // delte popup model state switch 
-  deletepatientswith() {
-    this.DeletePatientstatus = true;
-    console.log(this.DeletePatientstatus);
-    this.deletemodelInstany.hide();
-  }
+
 // delete handler
   onDelete(event: any) {
+    this.patientToDelete=event;
     const mymodel = document.getElementById('confirmDelete')!;
     this.deletemodelInstany = new bootstrap.Modal(mymodel);
     this.deletemodelInstany.show();
-    // if(this.DeletePatientstatus){
-    //     this.patientservice.Deletepatient(event.id).subscribe((res)=>{
+  }
 
-    //     });
-    console.log(this.DeletePatientstatus);
-    this.toastser.success('patient deedleted');
-  }
-// update
- UpdatePatient(data: any) {
-    console.log(data);
-    this.modalInstance.hide();
-  }
+
+  // Confirm delete
+deletepatientswith() {
+  if (!this.patientToDelete) return;
+
+  this.patientservice.Deletepatient(this.patientToDelete.id).subscribe({
+    next: (res) => {
+      // Remove patient from local list
+      this.AllPatient = this.AllPatient.filter(p => p.id !== this.patientToDelete!.id);
+      this.deletemodelInstany?.hide();
+      this.toastser.success("Patient deleted Successfully");
+      this.patientToDelete = undefined; 
+      this.cd.detectChanges();
+    },
+    error: (err) => {
+      this.toastser.error('Failed to delete patient');
+    }
+  });
+}
+
+onUpdate(patient: IpatientReponse) {
+  this.selectedRow = patient;
+  const modalEl = document.getElementById('update')!;
+  this.modalInstance = new bootstrap.Modal(modalEl);
+  this.modalInstance.show();
+}
+
+UpdatePatient(updatedPatient: IpatientReponse) {
+  // Update locally
+  const index = this.AllPatient.findIndex(p => p.id === updatedPatient.id);
+  if (index !== -1) this.AllPatient[index] = updatedPatient;
+
+  // Close modal
+  this.modalInstance?.hide();
+  this.toastser.success('Patient updated successfully');
+}
 }

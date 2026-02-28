@@ -16,7 +16,7 @@ export class TableComponent {
     filter: true,
     resizable: true,
     flex:1,
-    minWidth:120,
+    minWidth:80,
   };
   @Output() rowClicked = new EventEmitter<any>();
   selectedRow: any = null; 
