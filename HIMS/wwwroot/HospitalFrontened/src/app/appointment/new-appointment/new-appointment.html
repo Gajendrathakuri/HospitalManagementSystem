@@ -1,55 +1,115 @@
-<div class="container h-100 d-flex align-items-center">
-  <div class="row d-flex w-100 align-items-center justify-content-center ">
-    <div class="col-7 ">
-      <app-patient-detail> </app-patient-detail>
-    </div>
-    <div class="col-3 ">
-      <h6>Book Appointment</h6>
-      <form [formGroup]="form">
-        <!-- time -->
-        <div>
-          <label for="time" class="form-label">Time </label>
-          <input id="time" class="form-control" formControlName="time" type="time" placeholder="Time" />
-          @if (f['time'].invalid && (f['time']?.touched || f['time'].dirty)) {
-            @if (f['time']?.errors?.['required']) {
-                <span class="text-danger"> Time is Required</span>
-            }
-          }
-        </div>
-        <!-- date -->
-         <div>
-            <label for="date" class="form-label">Date</label>
-            <input type="date" id="date" class="form-control ">
-         </div>
-          @if (f['bookDate'].invalid && (f['bookDate']?.touched || f['bookDate'].dirty)) {
-            @if (f['bookDate']?.errors?.['required']) {
-                <span class="text-danger"> Date  is Required</span>
-            }
-          }
-         <!-- doctor -->
-          <div class="mt-3">
-            
-              <select class="form-select" formControlName="doctorid">
-                <option value="">Select Doctor</option>
+<div class="container mt-4">
+  <div>
+    <div class="container mt-3">
+     <div class="mb-3">
+    <input
+      type="search"
+      class="form-control"
+      placeholder="Search Patient by Contact"
+      [(ngModel)]="searchTerm"
+      (input)="filterPatients()"
+    />
+  </div>
+  <div class="text-danger" *ngIf="!isPatientFound">No Patient with this contact Register</div>
 
-                <option *ngFor="let doc of Doctors" [value]="doc">
-                  {{ doc }}
+    </div>
+
+    <div class="">
+      <form [formGroup]="appointmentForm" (ngSubmit)="submit()">
+        <div class="row">
+          <!-- LEFT SIDE - PATIENT DETAILS -->
+          <div class="col-md-6 border-end">
+            <h6 class="mb-3">Patient Details</h6>
+
+            <div class="mb-3">
+              <label class="form-label">Name</label>
+              <input type="text" class="form-control" [value]="patient?.[0]?.name" readonly />
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Phone</label>
+              <input type="text" class="form-control" [value]="patient?.[0]?.phoneNo" readonly />
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Email</label>
+              <input type="text" class="form-control" [value]="patient?.[0]?.email" readonly />
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Address</label>
+              <input type="text" class="form-control" [value]="patient?.[0]?.address" readonly />
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Age</label>
+              <input type="text" class="form-control" [value]="patient?.[0]?.age" readonly />
+            </div>
+          </div>
+
+          <!-- RIGHT SIDE - APPOINTMENT DETAILS -->
+          <div class="col-md-6">
+            <h6 class="mb-3">Appointment Details</h6>
+
+            <!-- Doctor -->
+            <div class="mb-3">
+              <label class="form-label">Doctor</label>
+              <select
+                class="form-select"
+                formControlName="staffId"
+                [class.is-invalid]="f['staffId'].touched && f['staffId'].invalid"
+              >
+                <option value="">Select Doctor</option>
+                <option *ngFor="let doc of doctors" [value]="doc.id">
+                  {{ doc.name }}
                 </option>
               </select>
-              
+              <div class="invalid-feedback">Doctor is required</div>
             </div>
-            <!-- appointmennt reason -->
-             <div class="mt-2">
-            <label for="apr" class="form-label">Appointment Reason</label>
-             <input id="apr" type="text" class="form-control" formControlName="reason">
 
-             </div>
-             
+            <!-- Date -->
+            <div class="mb-3">
+              <label class="form-label">Appointment Date</label>
+              <input
+                type="date"
+                class="form-control"
+                formControlName="appointmentDate"
+                [class.is-invalid]="f['appointmentDate'].touched && f['appointmentDate'].invalid"
+              />
+              <div class="invalid-feedback">Date is required</div>
+            </div>
+
+            <!-- Time -->
+            <div class="mb-3">
+              <label class="form-label">Appointment Time</label>
+              <input
+                type="time"
+                class="form-control"
+                formControlName="appointmentTime"
+                [class.is-invalid]="f['appointmentTime'].touched && f['appointmentTime'].invalid"
+              />
+              <div class="invalid-feedback">Time is required</div>
+            </div>
+
+            <!-- Reason -->
+            <div class="mb-3">
+              <label class="form-label">Reason to Visit</label>
+              <textarea
+                class="form-control"
+                rows="3"
+                formControlName="title"
+                [class.is-invalid]="f['title'].touched && f['title'].invalid"
+              ></textarea>
+              <div class="invalid-feedback">Reason is required (minimum 3 characters)</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Submit -->
+        <div class="text-end mt-3">
+          <button type="submit" class="btn btn-primary px-4">Book Appointment</button>
+        </div>
       </form>
-      <!-- Appointment Book -->
-       <div (click)="appointment()" class="btn  m-2 btn-primary d-flex mt-4  justify-content-center ">
-        Book Appointment
-       </div>
     </div>
   </div>
 </div>

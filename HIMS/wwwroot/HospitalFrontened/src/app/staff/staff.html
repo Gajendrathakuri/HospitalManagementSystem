@@ -7,8 +7,10 @@
   </div>
 </div>
 
+<app-tablecomponent [columns]="cols" [data]="AllStaffs"> </app-tablecomponent>
+<router-outlet></router-outlet>
 <!-- Modal -->
-<div class="modal fade container w-100" id="staffModal" tabindex="-1">
+<div class="modal fade container-fluid w-100" id="staffModal" tabindex="-1">
   <div class="modal-dialog modal-xl">
     <div class="modal-content">
       <div class="modal-header">
@@ -23,7 +25,6 @@
       </div>
 
       <div class="modal-footer">
-        <button class="btn btn-primary">Create Staff</button>
         <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
       </div>
     </div>

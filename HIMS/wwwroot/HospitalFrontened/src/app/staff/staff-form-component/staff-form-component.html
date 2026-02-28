@@ -1,83 +1,126 @@
 <div class="container mt-4">
-  <div class=" ">
-    <div class="">
-      <form [formGroup]="staffForm">
-        <div class="row d-flex justify-content-evenly">
-          <div class="col-4">
-            <!-- Name -->
-            <div class="mb-3">
-              <label class="form-label">Full Name</label>
-              <input type="text" class="form-control" formControlName="name" name="name" />
-            </div>
+  <form [formGroup]="staffForm">
+    <div class="row d-flex justify-content-evenly">
 
-            <!-- Address -->
-            <div class="mb-3">
-              <label class="form-label">Address</label>
-              <input type="text" class="form-control" formControlName="address" name="address" />
-            </div>
+      <!-- Left Column -->
+      <div class="col-4">
 
-            <!-- City -->
-            <div class="mb-3">
-              <label class="form-label">City</label>
-              <input type="text" class="form-control" formControlName="city" name="city" />
-            </div>
-
-            <!-- Phone -->
-            <div class="mb-3">
-              <label class="form-label">Phone No</label>
-              <input type="text" class="form-control"  name="phoneNo" />
-            </div>
-            <!-- Salary -->
-            <div class="mb-3">
-              <label class="form-label">Salary</label>
-              <input type="number" class="form-control" formControlName="dateOfBirth" name="salary" />
-            </div>
-          </div>
-          <div class="col-4">
-            <!-- Email -->
-            <div class="mb-3">
-              <label class="form-label">Email</label>
-              <input type="email" class="form-control" formControlName="email" name="email" />
-            </div>
-
-            <!-- Gender -->
-            <div class="mb-3">
-              <label class="form-label">Gender</label>
-              <select class="form-select" name="gender" formControlName="gender">
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-                <option value="Other">Other</option>
-              </select>
-            </div>
-
-            <!-- Profile -->
-            <div class="mb-3">
-              <label class="form-label">Staff Role</label>
-              <select class="form-select" name="profile" formControlName="profile">
-                <option value=""> select </option>
-              </select>
-            </div>
-
-            <!-- Department -->
-            <div class="mb-3">
-              <label class="form-label">Department</label>
-              <select class="form-select" name="departmentId">
-                <option value="">Select Department</option>
-                <!-- Load dynamically from API -->
-              </select>
-            </div>
-
-            <!-- Joined Date -->
-            <div class="mb-3">
-              <label class="form-label">Joined Date</label>
-              <input type="date" class="form-control" name="joinedDate" />
-            </div>
-            <div class="row ">
-              <button class="btn w-25 btn-primary" (click)="submit()">Create Staff</button>
-            </div>
+        <!-- Name -->
+        <div class="mb-3">
+          <label class="form-label">Full Name</label>
+          <input type="text" class="form-control" formControlName="name" />
+          <div class="text-danger" *ngIf="f['name'].invalid && (f['name'].touched || f['name'].dirty)">
+            <div *ngIf="f['name'].errors?.['required']">Name is required</div>
+            <div *ngIf="f['name'].errors?.['minlength']">Name must be greater than 3 characters</div>
           </div>
         </div>
-      </form>
+
+        <!-- Address -->
+        <div class="mb-3">
+          <label class="form-label">Address</label>
+          <input type="text" class="form-control" formControlName="address" />
+          <div class="text-danger" *ngIf="f['address'].invalid && (f['address'].touched || f['address'].dirty)">
+            <div *ngIf="f['address'].errors?.['required']">Address is required</div>
+          </div>
+        </div>
+
+        <!-- City -->
+        <div class="mb-3">
+          <label class="form-label">City</label>
+          <input type="text" class="form-control" formControlName="city" />
+        </div>
+
+        <!-- Phone -->
+        <div class="mb-3">
+          <label class="form-label">Phone No</label>
+          <input type="text" class="form-control" formControlName="phoneNo" />
+          <div class="text-danger" *ngIf="f['phoneNo'].invalid && (f['phoneNo'].touched || f['phoneNo'].dirty)">
+            <div *ngIf="f['phoneNo'].errors?.['required']">Phone number is required</div>
+            <div *ngIf="f['phoneNo'].errors?.['pattern']">Phone must be exactly 10 digits</div>
+          </div>
+        </div>
+
+        <!-- Salary -->
+        <div class="mb-3">
+          <label class="form-label">Salary</label>
+          <input type="number" class="form-control" formControlName="salary" />
+          <div class="text-danger" *ngIf="f['salary'].invalid && (f['salary'].touched || f['salary'].dirty)">
+            <div *ngIf="f['salary'].errors?.['required']">Salary is required</div>
+            <div *ngIf="f['salary'].errors?.['min']">Salary must be greater than 0</div>
+          </div>
+        </div>
+
+        <!-- dob -->
+           <div class="mb-3">
+          <label class="form-label">DateofBirth</label>
+          <input type="date" class="form-control" formControlName="dateOfBirth" />
+          <div class="text-danger" *ngIf="f['salary'].invalid && (f['dateOfBirth'].touched || f['dateOfBirth'].dirty)">
+            <div *ngIf="f['dateOfBirth'].errors?.['required']">Dob is required</div>
+            
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right Column -->
+      <div class="col-4">
+
+        <!-- Email -->
+        <div class="mb-3">
+          <label class="form-label">Email</label>
+          <input type="email" class="form-control" formControlName="email" />
+          <div class="text-danger" *ngIf="f['email'].invalid && (f['email'].touched || f['email'].dirty)">
+            <div *ngIf="f['email'].errors?.['email']">Enter a valid email address</div>
+          </div>
+        </div>
+
+        <!-- Gender -->
+        <div class="mb-3">
+          <label class="form-label">Gender</label>
+          <select class="form-select" formControlName="gender">
+            <option value="">Select Gender</option>
+            <option *ngFor="let gender of gendersTypes" [value]="gender.value">{{ gender.name }}</option>
+          </select>
+          <div class="text-danger" *ngIf="f['gender'].invalid && (f['gender'].touched || f['gender'].dirty)">
+            <div *ngIf="f['gender'].errors?.['required']">Gender is required</div>
+          </div>
+        </div>
+
+        <!-- Profile -->
+        <div class="mb-3">
+          <label class="form-label">Staff Role</label>
+          <select class="form-select" formControlName="profile">
+            <option value="">Employee Type</option>
+            <option *ngFor="let pro of staffProfiles" [value]="pro.value">{{ pro.name }}</option>
+          </select>
+          <div class="text-danger" *ngIf="f['profile'].invalid && (f['profile'].touched || f['profile'].dirty)">
+            <div *ngIf="f['profile'].errors?.['required']">Profile is required</div>
+          </div>
+        </div>
+
+        <!-- Departments -->
+        <div class="mb-3">
+          <label class="form-label">Department</label>
+          <select class="form-select" formControlName="departmentId">
+            <option value="">Select Department</option>
+            <option *ngFor="let item of ALLDepartments" [value]="item.id">{{ item.departmentName }}</option>
+          </select>
+          <div class="text-danger" *ngIf="f['departmentId'].invalid && (f['departmentId'].touched || f['departmentId'].dirty)">
+            <div *ngIf="f['departmentId'].errors?.['required']">Department is required</div>
+          </div>
+        </div>
+
+        <!-- Joined Date -->
+        <div class="mb-3">
+          <label class="form-label">Joined Date</label>
+          <input type="date" class="form-control" formControlName="joinedDate" />
+        </div>
+
+      </div>
     </div>
-  </div>
+
+    <div class="row mt-3 d-flex justify-content-center w-100">
+      <button class="btn btn-primary w-25" (click)="submit()" type="button">Create Staff</button>
+    </div>
+  </form>
 </div>

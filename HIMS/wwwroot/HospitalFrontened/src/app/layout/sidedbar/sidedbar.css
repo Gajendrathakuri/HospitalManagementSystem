@@ -16,7 +16,7 @@
   height: 100%;
   transition: width 0.3s;
   overflow-y: auto;  
-  width: 300px;
+  width: 200px;
   overflow-x: hidden;
 }
 

@@ -44,3 +44,7 @@ export interface IPatient {
   citizenshipNo?: string;      
   symptoms?: string[];           
 }
+
+
+
+

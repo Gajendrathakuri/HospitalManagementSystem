@@ -1,0 +1,108 @@
+<div class="container">
+  <form [formGroup]="formdata">
+    <div class="row">
+      
+      <!-- LEFT SIDE -->
+      <div class="col-6">
+        <!-- Full Name -->
+        <div class="mb-3">
+          <label class="form-label">Full Name</label>
+          <input
+            type="text"
+            formControlName="name"
+            class="form-control"
+            placeholder="Enter full name"
+          />
+        </div>
+
+        <!-- Address -->
+        <div class="mb-3">
+          <label class="form-label">Address</label>
+          <input
+            type="text"
+            formControlName="address"
+            class="form-control"
+            placeholder="Enter address"
+          />
+        </div>
+
+        <!-- Date of Birth -->
+        <div class="mb-3">
+          <label class="form-label">Date of Birth</label>
+          <input
+            type="date"
+            formControlName="dateOfBirth"
+            class="form-control"
+            (change)="getAge(formdata.get('dateOfBirth')?.value)"
+          />
+        </div>
+
+        <!-- Age -->
+        <div class="mb-3">
+          <label class="form-label">Age</label>
+          <input
+            type="text"
+            formControlName="age"
+            class="form-control"
+            readonly
+          />
+        </div>
+      </div>
+
+      <!-- RIGHT SIDE -->
+      <div class="col-6">
+        <!-- Phone Number -->
+        <div class="mb-3">
+          <label class="form-label">Phone Number</label>
+          <input
+            type="number"
+            formControlName="phoneNo"
+            class="form-control"
+            placeholder="Enter phone number"
+          />
+        </div>
+
+        <!-- Citizenship Number -->
+        <div class="mb-3">
+          <label class="form-label">Citizenship Number</label>
+          <input
+            type="text"
+            formControlName="citizenshipNo"
+            class="form-control"
+            placeholder="Enter citizenship number"
+          />
+        </div>
+
+        <!-- Email -->
+        <div class="mb-3">
+          <label class="form-label">Email</label>
+          <input
+            type="email"
+            formControlName="email"
+            class="form-control"
+            placeholder="Enter email address"
+          />
+        </div>
+
+        <!-- Gender -->
+        <div class="mb-3">
+          <label class="form-label">Gender</label>
+          <select class="form-select" formControlName="gender">
+            <option value="">Select Gender</option>
+            <option *ngFor="let gender of genders" [value]="gender.value">
+              {{ gender.name }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+    </div>
+  </form>
+
+  <!-- Save Button -->
+  <div class="row justify-content-center mt-3">
+    <button type="button" (click)="submit()" class="btn btn-primary w-25">
+      Save
+    </button>
+  </div>
+</div>

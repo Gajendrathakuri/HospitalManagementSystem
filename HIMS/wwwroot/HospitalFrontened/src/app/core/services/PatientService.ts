@@ -16,11 +16,15 @@ export class PatientService {
    }
  //createpatient
  AddPatients(patient:PatientDto ):Observable<IpatientReponse>{
+<<<<<<< HEAD
   return this.http.post<IpatientReponse>(this.base_url,patient);
+=======
+  return this.http.post<IpatientReponse>(this.base_url+"Patient",patient);
+>>>>>>> feature/frontend
  }
  //deletepatient
 Deletepatient(id:any):Observable<any>{
-  return this.http.delete<any>(this.base_url+id);
+  return this.http.delete<any>(this.base_url+"patient/"+id);
 }
  //updatepatients
 Upatepatient(id:string | number ,patient:PatientDto):Observable<IpatientReponse>{

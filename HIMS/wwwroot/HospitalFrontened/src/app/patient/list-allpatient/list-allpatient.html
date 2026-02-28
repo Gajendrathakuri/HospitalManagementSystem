@@ -1,0 +1,66 @@
+ <app-tablecomponent 
+ [data]="AllPatient"
+ [columns]="patientColumns"
+ (rowClicked)="onRowSelected($event)"
+ >
+ </app-tablecomponent>
+ 
+<div class="modal" tabindex="-1" id="update">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-title">
+          <h4 class="text-center justify-content-center">Patient Details</h4>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
+      </div>
+      <div class="modal-body modal-md">
+        <app-patient-update
+          [Patient]="selectedRow"
+          (save)="UpdatePatient($event)"
+        ></app-patient-update>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-danger" (click)="close()" data-bs-dismis="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Confirm Delete Modal -->
+<div
+  class="modal fade"
+  id="confirmDelete"
+  tabindex="-1"
+  aria-labelledby="confirmDeleteLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <!-- centers the modal vertically -->
+    <div class="modal-content border-0 shadow-sm">
+      <!-- adds subtle shadow -->
+
+      <!-- Header -->
+      <div class="modal-header bg-danger text-white">
+        <!-- red header for delete -->
+        <h5 class="modal-title" id="confirmDeleteLabel">Confirm Delete</h5>
+        <button
+          type="button"
+          class="btn-close btn-close-white"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+
+      <!-- Body -->
+      <div class="modal-body text-center py-4">
+        <p class="mb-4 fs-6">Are you sure you want to delete this patient?</p>
+        <div class="d-flex justify-content-center gap-3">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+          <button type="button" class="btn btn-danger" (click)="deletepatientswith()">Yes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,29 +1,68 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Router, RouterOutlet } from '@angular/router';
 import { TableComponent } from "../shared/Components/table-component/table-component";
 import { CardComponent } from "../shared/Components/card-component/card-component";
+import { Appointmentservice } from '../core/services/appointmentservice';
+import { PatientService } from '../core/services/PatientService';
+import { Staffservices } from '../core/services/staffservices';
+import { IpatientReponse } from '../core/types/patient';
+import { map, Observable } from 'rxjs';
+import { StaffResponseDto } from '../core/Dtos/staff/staffdto';
+import { AppointmentResponseDto } from '../core/Dtos/Appointmentdots/AppointmentDtos';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-dashboard',
+<<<<<<< HEAD
   imports: [RouterOutlet, CardComponent],
+=======
+  imports: [AsyncPipe],
+>>>>>>> feature/frontend
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
 })
-export class Dashboard {
-  patients = [
-    { id: 1, name: 'Gajendra', age: 22, gender: 'Male' },
-    { id: 2, name: 'Anita', age: 30, gender: 'Female' },
-    { id: 3, name: 'Ravi', age: 28, gender: 'Male' }
-  ];
+export class Dashboard implements OnInit {
+totalAppointments$!: Observable<number>;
+  totalPatients$!: Observable<number>;
+  totalDoctors$!: Observable<number>;
+  totalStaff$!: Observable<number>;
 
-  patientColumns = [
-    { headerName: 'ID', field: 'id' },
-    { headerName: 'Name', field: 'name' },
-    { headerName: 'Age', field: 'age' },
-    { headerName: 'Gender', field: 'gender' }
-  ];
+  constructor(
+    private appointmentService: Appointmentservice,
+    private patientService: PatientService,
+    private staffService: Staffservices
+  ) {}
 
-  onRowClick(row: any) {
-    console.log('Clicked Row:', row);
+  ngOnInit(): void {
+    // Transform the array response into count using map
+    this.totalAppointments$ = this.appointmentService.GetAllAppointments()
+      .pipe(map((res: AppointmentResponseDto[]) => res.length));
+
+    this.totalPatients$ = this.patientService.ListAllPatients()
+      .pipe(map((res: IpatientReponse[]) => res.length));
+
+    this.totalDoctors$ = this.staffService.GetAllDoctors()
+      .pipe(map((res: StaffResponseDto[]) => res.length));
+
+    this.totalStaff$ = this.staffService.GetAllStaffs()
+      .pipe(map((res: StaffResponseDto[]) => res.length));
   }
+
+  // Navigation buttons
+  goToPatients() {
+    window.location.href = '/patient';
+  }
+
+  goToAppointments() {
+    window.location.href = '/appointment';
+  }
+
+  goToStaff() {
+    window.location.href = '/staff';
+  }
+
+  ViewDoctos(){
+    
+  }
+ 
 }
