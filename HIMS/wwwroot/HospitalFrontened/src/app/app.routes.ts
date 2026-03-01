@@ -12,21 +12,19 @@ export const routes: Routes = [
     path: '',
     component: Layout,
     children: [
-      {
-        path: 'dashboard',
-        component: Dashboard,
-      },
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+      { path: 'dashboard', component: Dashboard },
       {
         path: 'patient',
-        loadChildren: () => import('./patient/patient.route').then((e) => e.PatientRoute),
+        loadChildren: () => import('./patient/patient.modules').then((e) => e.PatientModule),
       },
       {
         path: 'appointment',
-        loadChildren: () => import('./appointment/AppointRoute.routes').then((e) => e.AppointRoute),
+        loadChildren: () => import('./appointment/appointment.modules').then((e) => e.AppointmentModule),
       },
       {
         path: 'staff',
-        loadChildren: ()=>import("./staff/staff.routes").then((m)=>m.staffRoutes),
+        loadChildren: () => import('./staff/staff.modules').then((m) => m.StaffModule),
       },
     ],
   },

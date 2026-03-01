@@ -15,4 +15,5 @@ export class Departmentservice {
     GetAllDepartments():Observable<DepartmentDto[]>{
       return this.http.get<DepartmentDto[]>(this.baseUrl);
     }
+  
 }

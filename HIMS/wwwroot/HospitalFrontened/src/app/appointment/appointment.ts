@@ -9,6 +9,7 @@ import {
 import { Appointmentservice } from '../core/services/appointmentservice';
 import { NewAppointment } from './new-appointment/new-appointment';
 import * as bootstrap from 'bootstrap';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-appointment',
   imports: [AgGridModule, TableComponent, NewAppointment],
@@ -18,12 +19,13 @@ import * as bootstrap from 'bootstrap';
 export class Appointment implements OnInit {
   AppointmentsData: AppointmentResponseDto[] = [];
   appointmentModel!: bootstrap.Modal;
-  constructor(private appointmentservice: Appointmentservice,
-    private cd:ChangeDetectorRef
+  constructor(
+    private appointmentservice: Appointmentservice,
+    private cd: ChangeDetectorRef,
+    private toastservice: ToastrService,
   ) {}
   ngOnInit(): void {
     this.GetAllAppointments();
-
   }
 
   cols: ColDef[] = [
@@ -42,34 +44,54 @@ export class Appointment implements OnInit {
       },
     },
     {
-      headerName: 'Action', 
+      headerName: 'Action',
+      minWidth: 250,
+      cellStyle: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+      },
       cellRenderer: (params: any) => {
-        const container = document.createElement('div');
-        container.className = 'd-flex';
+        const wrapper=document.createElement("div");
         const BookAppointment = document.createElement('button');
-        ((BookAppointment.className = 'btn me-2  btn-primary m-auto'),
-          (BookAppointment.textContent = 'cancel Appointment'));
-        BookAppointment.onclick=()=>{
-          this.CancelAppointment(params.id);
-        }
+        BookAppointment.className = `${params.data?.appointmentstatus==2 ?'disabled':''} btn btn-primary me-2 btn-sm px-2 py-1 `;
+        BookAppointment.style.fontSize = '12px';
+        BookAppointment.textContent = 'Cancel Appointment';
+        // Delete
+        const DeleteAppointment=document.createElement("button")
+         DeleteAppointment.className = 'btn btn-primary me-2 btn-sm px-2 py-1';
+        DeleteAppointment.style.fontSize = '12px';
+        DeleteAppointment.textContent = 'Delete';
 
-        container.appendChild(BookAppointment);
-        return container;
+        DeleteAppointment.onclick=()=>{   
+          console.log(params?.data?.appointmentstatus);
+        },
+           BookAppointment.onclick = () => {
+          this.CancelAppointment(params?.data?.appointmentid);
+        };
+        wrapper.appendChild(BookAppointment);
+        wrapper.appendChild(DeleteAppointment);
+
+        return wrapper; 
       },
     },
   ];
-
+// get All the Appointments 
   GetAllAppointments() {
     this.appointmentservice.GetAllAppointments().subscribe({
       next: (res) => {
         this.AppointmentsData = res;
-        console.log(res);
         this.cd.detectChanges();
       },
     });
   }
   // cancel Appointment
-  CancelAppointment(id:string){
+  CancelAppointment(id: string) {
+    this.appointmentservice.CancelAppointment(id).subscribe({
+      next: (res) => {
+        this.toastservice.success('Appointment Cancelled');
+      },
+    });
     this.cd.detectChanges();
   }
 

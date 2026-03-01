@@ -23,8 +23,8 @@ Deletepatient(id:any):Observable<any>{
   return this.http.delete<any>(this.base_url+"patient/"+id);
 }
  //updatepatients
-Upatepatient(id:string | number ,patient:PatientDto):Observable<IpatientReponse>{
-  return this.http.put<IpatientReponse>(this.base_url+id,patient);
+Upatepatient(id:string | any,patient:IpatientReponse):Observable<IpatientReponse>{
+  return this.http.put<IpatientReponse>(this.base_url+"Patient/"+id,patient);
 }
 
 }
