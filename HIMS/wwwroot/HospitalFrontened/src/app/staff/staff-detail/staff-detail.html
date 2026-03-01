@@ -1,1 +1,50 @@
-<p>staff-detail works!</p>
+<div class="container mt-4">
+  <div class="card shadow-sm">
+    
+    <!-- Header -->
+    <div class="card-header bg-primary text-white">
+      <h4 class="mb-0">Staff Details</h4>
+    </div>
+
+    <!-- Body -->
+    <div class="card-body">
+      <div class="row">
+
+        <!-- LEFT COLUMN -->
+        <div class="col-md-6">
+
+          <p><strong>Full Name:</strong> {{ staff?.name }}</p>
+
+          <p><strong>Address:</strong> {{ staff?.address }}</p>
+
+          <p><strong>City:</strong> {{ staff?.city || 'N/A' }}</p>
+
+          <p><strong>Phone No:</strong> {{ staff?.phoneNo }}</p>
+
+          <p><strong>Salary:</strong> {{ staff?.salary }}</p>
+
+          <p><strong>Date of Birth:</strong> 
+            {{ staff?.dateofBirth | date:'yyyy-MM-dd'  }}
+          </p>
+
+        </div>
+
+        <!-- RIGHT COLUMN -->
+        <div class="col-md-6">
+
+          <p><strong>Email:</strong> {{ staff?.email }}</p>
+
+          <p><strong>Gender:</strong> {{ getGenderName()}}</p>
+
+          <p><strong>Profile:</strong> {{ GetStaffProfile() }}</p>
+
+          <p><strong>Department:</strong>{{GetDept()}}</p>
+
+          <p><strong>Joined Date:</strong> 
+            {{ staff?.joinedDate | date:'yyyy-MM-dd'  }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

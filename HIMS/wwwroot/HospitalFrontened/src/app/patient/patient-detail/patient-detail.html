@@ -1,42 +1,37 @@
-<!-- 
-<div class="card shadow-sm p-3 mb-3">
-  <div class="card-header bg-primary text-white">
-    <h5 class="mb-0">Patient Details</h5>
-  </div>
-
-  <div class="card-body">
-    <div class="row mb-2">
-      <div class="col-md-4"><strong>Name:</strong> {{ patient.name }}</div>
-      <div class="col-md-4"><strong>Age:</strong> {{ patient.age || '-' }}</div>
-       <div class="col-md-4"><strong>Gender:</strong> {{ }}</div> 
+<div class="container mt-4">
+  <div class="card shadow-sm">
+    <div class="card-header bg-primary text-white">
+      <h4 class="mb-0">Patient Details</h4>
     </div>
+    <div class="card-body">
+      <div class="row">
+        <!-- LEFT COLUMN -->
+        <div class="col-md-6">
+          <p><strong>Full Name:</strong> {{ patient.name }}</p>
+          <p><strong>Age:</strong> {{ patient.age }}</p>
+          <p><strong>Date of Birth:</strong> {{ patient.dateofBirth |date:'yyyy-MM-dd'}}</p>
+          <p><strong>Gender:</strong> {{ getGenderName() }}</p>
+          <p><strong>Address:</strong> {{ patient.address }}</p>
+          <p><strong>City:</strong> {{ patient.city || 'N/A' }}</p>
+        </div>
 
-    <div class="row mb-2">
-      <div class="col-md-6"><strong>Email:</strong> {{ patient?.email || '-' }}</div>
-      <div class="col-md-6"><strong>Phone:</strong> {{ patient?.phone || '-' }}</div>
-    </div>
-
-    <div class="row mb-2">
-      <div class="col-md-6"><strong>Address:</strong> {{ patient.address || '-' }}</div>
-      <div class="col-md-6"><strong>City:</strong> {{ patient.city || '-' }}</div>
-    </div>
-
-    <div class="row mb-2">
-      <div class="col-md-6"><strong>Citizenship No:</strong> {{ patient.citizenshipNo || '-' }}</div>
-      <div class="col-md-6"><strong>Date of Birth:</strong> {{ getFormattedDOB() }}</div>
-    </div>
-
-    <div class="row mb-2">
-      <div class="col-md-12"><strong>Disease:</strong> {{ patient.disease || '-' }}</div>
-    </div>
-
-    <div class="row mb-2" *ngIf="patient.symptoms?.length">
-      <div class="col-md-12">
-        <strong>Symptoms:</strong>
-        <span *ngFor="let s of patient.symptoms; let i = index">
-          {{ s }}<span *ngIf="i < patient.symptoms.length - 1">, </span>
-        </span>
+        <!-- RIGHT COLUMN -->
+        <div class="col-md-6">
+          <p><strong>Phone No:</strong> {{ patient.phoneNo }}</p>
+          <p><strong>Email:</strong> {{ patient.email }}</p>
+          <p><strong>Citizenship No:</strong> {{ patient.citizenshipNo }}</p>
+          <p><strong>Disease:</strong> {{ patient.disease || 'N/A' }}</p>
+          <p><strong>Symptoms:</strong> 
+            <span *ngIf="patient.symptoms.length > 0; else noSymptoms">
+              {{ patient.symptoms.join(', ') }}
+            </span>
+            <ng-template #noSymptoms>N/A</ng-template>
+          </p>
+        </div>
       </div>
     </div>
+    <div class="card-footer text-end">
+      <button class="btn btn-secondary" (click)="goBack()">Back</button>
+    </div>
   </div>
-</div>-->
+</div>

@@ -17,4 +17,9 @@ export class Appointmentservice {
   CreateNewAppointment(newAppointment:CreateAppointmentDto):Observable<AppointmentResponseDto[]>{
     return this.http.post<AppointmentResponseDto[]>(this.base_url,newAppointment);
   }
+  // cancel appointment
+    // cancel Appointment
+    CancelAppointment(id:string):Observable<boolean>{
+      return this.http.delete<boolean>(this.base_url+`/${id}`);
+    }
 }

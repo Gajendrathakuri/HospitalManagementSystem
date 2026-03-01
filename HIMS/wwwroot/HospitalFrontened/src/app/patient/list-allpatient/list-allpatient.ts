@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, Query } from '@angular/core';
-import { IpatientReponse } from '../../core/types/patient';
+import { IPatient, IpatientReponse } from '../../core/types/patient';
 import { PatientService } from '../../core/services/PatientService';
 import { ColDef, ValueFormatterParams } from 'ag-grid-community';
 import * as bootstrap from 'bootstrap';
@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { ToastRef, ToastrService } from 'ngx-toastr';
 import { AgGridAngular } from "ag-grid-angular";
 import { TableComponent } from "../../shared/Components/table-component/table-component";
+import { ShareService } from '../../core/services/GlobalSeerevice/share-service';
 
 @Component({
   selector: 'app-list-allpatient',
@@ -22,7 +23,8 @@ export class ListAllpatient implements OnInit {
     private patientservice: PatientService,
     private router: Router,
     private toastser: ToastrService,
-    private cd:ChangeDetectorRef
+    private cd:ChangeDetectorRef,
+    private shareservice:ShareService
   ) {}
    DeletePatientstatus: boolean = false;
   
@@ -74,6 +76,7 @@ export class ListAllpatient implements OnInit {
         viewbutton.className = 'btn btn-sm btn-primary me-2 ';
         viewbutton.textContent = 'View';
         viewbutton.onclick = () => {
+          this.shareservice.SetData(params.data);
           this.router.navigate(['patient/detail/', params.data.id]);
         };
         container.appendChild(updateBtn);
@@ -138,13 +141,14 @@ onUpdate(patient: IpatientReponse) {
   this.modalInstance.show();
 }
 
-UpdatePatient(updatedPatient: IpatientReponse) {
+UpdatePatient(updatedPatientValue: IpatientReponse) {
   // Update locally
-  const index = this.AllPatient.findIndex(p => p.id === updatedPatient.id);
-  if (index !== -1) this.AllPatient[index] = updatedPatient;
-
+  // const index = this.AllPatient.findIndex(p => p.id === updatedPatient.id);
+ this.patientservice.Upatepatient(updatedPatientValue?.id,updatedPatientValue).subscribe((res)=>{
+  this.toastser.success("patient Updated Successfully");
+  console.log(res);
+ })
   // Close modal
   this.modalInstance?.hide();
-  this.toastser.success('Patient updated successfully');
 }
 }
