@@ -67,5 +67,12 @@ namespace HIMS.Controllers.PatientController
         {
             return Ok(await _ipatientservice.DeletePatient(id));
         }
+
+        // updatepatient
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdatePatient(Guid id,[FromBody] PatientDto patientdto)
+        {
+            return Ok(await _ipatientservice.UpdatePatient(id,patientdto));
+        }
     }
 }
