@@ -13,7 +13,11 @@ import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-dashboard',
+<<<<<<< HEAD
+  imports: [RouterOutlet, CardComponent],
+=======
   imports: [AsyncPipe],
+>>>>>>> feature/frontend
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
 })

@@ -14,7 +14,7 @@ import { RouterOutlet } from '@angular/router';
 import { StaffDetail } from './staff-detail/staff-detail';
 @Component({
   selector: 'app-staff',
-  imports: [StaffFormComponent, TableComponent, RouterOutlet, StaffDetail],
+  imports: [StaffFormComponent, TableComponent, RouterOutlet],
   templateUrl: './staff.html',
   styleUrl: './staff.css',
 })
