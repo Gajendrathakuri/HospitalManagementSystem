@@ -17,7 +17,6 @@ import { DatePipe, NgIf } from '@angular/common';
   selector: 'app-patient-detail',
   imports: [NgIf,DatePipe],
   templateUrl: './patient-detail.html',
-  styleUrl: './patient-detail.css',
 })
 export class PatientDetail implements OnInit {
   patient:any;

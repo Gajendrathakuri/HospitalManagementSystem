@@ -14,7 +14,7 @@ import { ShareService } from '../../core/services/GlobalSeerevice/share-service'
   selector: 'app-list-allpatient',
   imports: [PatientUpdate, TableComponent],
   templateUrl: './list-allpatient.html',
-  styleUrl: './list-allpatient.css',
+  // styleUrl: './list-allpatient.css',
 })
 export class ListAllpatient implements OnInit {
   AllPatient: IpatientReponse[]= [];

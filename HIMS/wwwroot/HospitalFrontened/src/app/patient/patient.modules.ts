@@ -5,7 +5,7 @@ import { PatientUpdate } from "./patient-update/patient-update";
 import { Patientlayout } from "./patientlayout/patientlayout";
 import { TableComponent } from "../shared/Components/table-component/table-component";
 import { RouterModule } from "@angular/router";
-import { PatientRoute } from "./patient.route";
+import { PatientRoutes } from "./patient.routes";
 
 @NgModule(
     {
@@ -15,7 +15,7 @@ import { PatientRoute } from "./patient.route";
             PatientUpdate,
             Patientlayout,
             TableComponent,
-            RouterModule.forChild(PatientRoute)
+            RouterModule.forChild(PatientRoutes)
         ],
         
     }

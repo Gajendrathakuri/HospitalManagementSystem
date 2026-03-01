@@ -109,7 +109,7 @@ export class StaffFormComponent implements OnInit {
     formdata.gender=Number(formdata.gender);
     formdata.profile=Number(formdata.profile);
     formdata.departmentId=Number(formdata.departmentId);
-  
+      console.log(formdata);
     this.staffCreated.emit(formdata);
   }
 }

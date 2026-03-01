@@ -8,7 +8,6 @@ import { GenderTypes } from '../../core/Dtos/AddPatientDtos';
   standalone: true,
   imports: [ReactiveFormsModule, NgForOf],
   templateUrl: './patient-update.html',
-  styleUrl: './patient-update.css',
 })
 export class PatientUpdate implements OnChanges {
   @Input() Patient: any;
@@ -16,7 +15,7 @@ export class PatientUpdate implements OnChanges {
   originalDob: any;
   formdata!: FormGroup;
   currentAge!: number;
-
+  beforeUpdateDateofBirth:any;
   genders = Object.keys(GenderTypes)
     .filter((key) => isNaN(Number(key)))
     .map((key) => ({
@@ -43,6 +42,7 @@ export class PatientUpdate implements OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['Patient'] && this.Patient) {
       const currentPatient = { ...this.Patient };
+      this.beforeUpdateDateofBirth=currentPatient.dateofBirth;
       this.originalDob = currentPatient?.dateofBirth.split('T')[0];
       // date format
       const day=this.originalDob.split("-")[2]
@@ -69,7 +69,7 @@ export class PatientUpdate implements OnChanges {
     formValues.gender = Number(formValues.gender);
 
     if (!formValues.dateOfBirth && this.originalDob) {
-      formValues.dateOfBirth = this.originalDob;
+      formValues.dateOfBirth = this.beforeUpdateDateofBirth;
     }
     console.log(formValues);
     if (this.formdata.valid) {

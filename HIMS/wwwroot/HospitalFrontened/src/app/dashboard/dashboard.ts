@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, RouterOutlet } from '@angular/router';
-import { TableComponent } from "../shared/Components/table-component/table-component";
-import { CardComponent } from "../shared/Components/card-component/card-component";
 import { Appointmentservice } from '../core/services/appointmentservice';
 import { PatientService } from '../core/services/PatientService';
 import { Staffservices } from '../core/services/staffservices';
@@ -13,11 +10,7 @@ import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-dashboard',
-<<<<<<< HEAD
-  imports: [RouterOutlet, CardComponent],
-=======
   imports: [AsyncPipe],
->>>>>>> feature/frontend
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
 })

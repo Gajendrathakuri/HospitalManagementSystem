@@ -1,11 +1,6 @@
 import { Layout } from './layout/layout';
-import { Patientlayout } from './patient/patientlayout/patientlayout';
-import { PatientRoute } from './patient/patient.route';
-import { Appointment } from './appointment/appointment';
-import { AppointRoute } from './appointment/AppointRoute.routes';
 import { Dashboard } from './dashboard/dashboard';
 import { Routes } from '@angular/router';
-import { Staff } from './staff/staff';
 
 export const routes: Routes = [
   {

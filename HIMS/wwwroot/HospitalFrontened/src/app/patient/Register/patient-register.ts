@@ -12,7 +12,6 @@ import { ReligionTypes } from '../../core/types/patient';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, FormsModule, RtcNepaliDatePickerModule],
   templateUrl: './patient-register.html',
-  styleUrls: ['./patient-register.css'],
 })
 export class PatientRegister implements OnInit {
   form!: FormGroup;

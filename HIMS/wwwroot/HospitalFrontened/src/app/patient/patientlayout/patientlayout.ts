@@ -6,7 +6,6 @@ import { RouterOutlet } from '@angular/router';
   selector: 'app-patientlayout',
   imports: [PatientRegister, ListAllpatient, RouterOutlet],
   templateUrl: './patientlayout.html',
-  styleUrl: './patientlayout.css',
 })
 export class Patientlayout {
 
